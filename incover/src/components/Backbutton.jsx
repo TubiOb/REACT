@@ -3,10 +3,10 @@ import { MdArrowBackIosNew } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 
 const Backbutton = () => {
-    const navigate = useNavigate();
+    const history = useNavigate();
 
     const handleGoBack = () => {
-        navigate.goBack();
+        history(-1);
     };
 
   return (

@@ -9,12 +9,12 @@ function App() {
   return (
     <div>
      <BrowserRouter>
-        <Routes>
-          <Route index element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/policies" element={<Policies />} />
-        </Routes>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/policies" element={<Policies />} />
+      </Routes>
      </BrowserRouter>
     </div>
   );
