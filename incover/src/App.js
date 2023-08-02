@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Policies from "./pages/Policies";
+import MotorInsurance from "./pages/MotorInsurance";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/policies" element={<Policies />} />
+        <Route path="/policies/motorInsurance" element={<MotorInsurance />} />
       </Routes>
      </BrowserRouter>
     </div>
