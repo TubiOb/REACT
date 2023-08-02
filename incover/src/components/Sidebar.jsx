@@ -28,7 +28,7 @@ const Sidebar = () => {
           <ul className='w-full gap-1.5'>
             <h3 className='text-gray-400 uppercase text-xs'>insurance</h3>
             <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'my-policies' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-policies')}><Link to='/policies'  className='flex'><GoShieldCheck size={15}/>my policies</Link></li>
-            <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'my-claims' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><Link to='/dashboard'  className='flex'><RiBillLine size={15}/>my claims </Link><IoIosArrowForward size={15} className='ml-3 md:ml-12'/></li>
+            <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'my-claims' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><RiBillLine size={15}/>my claims <IoIosArrowForward size={15} className='ml-3 md:ml-12'/></li>
           </ul>
         </ul>
         
