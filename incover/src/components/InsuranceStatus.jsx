@@ -11,8 +11,8 @@ const InsuranceStatus = () => {
   return (
     <div className='w-full flex flex-col'>
         <div className="tabs flex items-center align-middle justify-start gap-6 border-b border-b-neutral-200 h-12 w-[95%] mx-auto p-2 md:text-sm text-xs">
-            <div className={`tab ${activeTab === 'active' ? 'border-b-green-700' : ''} cursor-pointer transition-all px-4 py-2 border-b-2 border-transparent border-green-700`} onClick={() => handleTabClick('active')}>Active Insurance</div>
-            <div className={`tab ${activeTab === 'expired' ? 'border-b-green-700' : ''} cursor-pointer transition-all px-4 py-2 border-b-2 border-transparent border-green-700`} onClick={() => handleTabClick('expired')}>Expired Insurance</div>
+            <div className={`tab ${activeTab === 'active' ? 'border-b-green-700' : ''} cursor-pointer transition-all px-4 py-3.5 border-b-2 border-transparent border-green-700`} onClick={() => handleTabClick('active')}>Active Insurance</div>
+            <div className={`tab ${activeTab === 'expired' ? 'border-b-green-700' : ''} cursor-pointer transition-all px-4 py-3.5 border-b-2 border-transparent border-green-700`} onClick={() => handleTabClick('expired')}>Expired Insurance</div>
         </div>
 
       {activeTab === 'active' && (
