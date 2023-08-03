@@ -14,6 +14,17 @@ const SetupSidebar = () => {
     const handleItemClick = (item) => {
         setActiveItem(item);
     };
+
+    const [isProfileOptionVisible, setProfileOptionVisible] = useState(false);
+
+    const handleLiItemClick = () => {
+      setProfileOptionVisible(true);
+    };
+
+    const handleIconClick = () => {
+      setProfileOptionVisible(false);
+    };
+
   return (
     <div className="w-40 md:w-64 flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed">
         <img src={logo} alt="BOI Ins Broker" className='w-[150px] mx-auto mt-4'/>
@@ -33,13 +44,15 @@ const SetupSidebar = () => {
         
 
         <ul className='w-[95%] mx-auto'>
-          <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center'>
+          <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:rounded-md' onClick={handleLiItemClick}>
             <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
             <p className='capitalize text-xs md:text-sm font-semibold '>fiyin oluwakemi</p>
-            <RiArrowDownSLine  size={20}/>
+            <RiArrowDownSLine size={20} />
+            {isProfileOptionVisible && (
             <div className='flex flex-col items-center rounded-lg justify-between p-2 gap-1 absolute -top-[220px] left-1/2 right-1/2 transform translate-x-[-50%] shadow-xl bg-blue-300 w-[95%] mx-auto h-52'>
-              <RiArrowUpSLine size={20} />
+              <RiArrowUpSLine size={20} onClick={handleIconClick} className='cursor-pointer'/>
             </div>
+            )}
           </li>
         </ul>
 
