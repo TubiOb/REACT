@@ -6,7 +6,7 @@ import { MdOutlineSpaceDashboard,  } from 'react-icons/md'
 import { BsSubtract } from 'react-icons/bs'
 import { GoShieldCheck } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
-import { RiBillLine, RiArrowDownSLine } from 'react-icons/ri'
+import { RiBillLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
 
 const SetupSidebar = () => {
     const [activeItem, setActiveItem] = useState('setup-guide');
@@ -33,10 +33,13 @@ const SetupSidebar = () => {
         
 
         <ul className='w-[95%] mx-auto'>
-          <li className='flex flex-row p-0.5 md:p-1.5 justify-between items-center'>
+          <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center'>
             <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
             <p className='capitalize text-xs md:text-sm font-semibold '>fiyin oluwakemi</p>
             <RiArrowDownSLine  size={20}/>
+            <div className='flex flex-col items-center rounded-lg justify-between p-2 gap-1 absolute -top-[220px] left-1/2 right-1/2 transform translate-x-[-50%] shadow-xl bg-blue-300 w-[95%] mx-auto h-52'>
+              <RiArrowUpSLine size={20} />
+            </div>
           </li>
         </ul>
 
