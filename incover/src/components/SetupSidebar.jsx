@@ -7,6 +7,7 @@ import { BsSubtract } from 'react-icons/bs'
 import { GoShieldCheck } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 import { RiBillLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
+import { CiExport } from 'react-icons/ci'
 
 const SetupSidebar = () => {
     const [activeItem, setActiveItem] = useState('setup-guide');
@@ -18,7 +19,7 @@ const SetupSidebar = () => {
     const [isProfileOptionVisible, setProfileOptionVisible] = useState(false);
 
     const handleLiItemClick = () => {
-      setProfileOptionVisible(true);
+      setProfileOptionVisible(!isProfileOptionVisible);
     };
 
     const handleIconClick = () => {
@@ -44,13 +45,38 @@ const SetupSidebar = () => {
         
 
         <ul className='w-[95%] mx-auto'>
-          <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:rounded-md' onClick={handleLiItemClick}>
-            <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
-            <p className='capitalize text-xs md:text-sm font-semibold '>fiyin oluwakemi</p>
-            <RiArrowDownSLine size={20} />
+          <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:cursor-pointer hover:rounded-md' >
+            <div className='flex flex-row p-0.5 md:p-1 justify-center gap-3 items-center' onClick={handleLiItemClick}>
+              <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
+              <p className='capitalize text-xs md:text-sm font-semibold '>fiyin oluwakemi</p>
+              <RiArrowDownSLine size={20} />
+            </div>
             {isProfileOptionVisible && (
-            <div className='flex flex-col items-center rounded-lg justify-between p-2 gap-1 absolute -top-[220px] left-1/2 right-1/2 transform translate-x-[-50%] shadow-xl bg-blue-300 w-[95%] mx-auto h-52'>
-              <RiArrowUpSLine size={20} onClick={handleIconClick} className='cursor-pointer'/>
+            <div className='flex flex-col rounded-md absolute -top-[170px] left-1/2 right-1/2 transform translate-x-[-50%] shadow-xl bg-white w-full py-2 mx-auto h-auto' onClick={handleIconClick}>
+              <ul className='grid grid-cols-1 items-center justify-center gap-3'>
+                <li className='flex border-b border-b-neutral-300 items-center justify-center'>
+                  <div className='flex flex-row p-0.5 md:p-2 justify-center gap-3 items-center'>
+                    <img src={myImage} alt="" className='rounded-full w-4 md:w-6 object-cover'/>
+                    <p className='capitalize text-xs font-semibold ml-1'>fiyin oluwakemi</p>
+                    <RiArrowUpSLine size={20} className='cursor-pointer'/>
+                  </div>
+                </li>
+                <li className='flex border-b border-b-neutral-300 text-sm items-center justify-start px-2'>
+                  <ul className='grid grid-cols-1 text-left items-center justify-center gap-2 p-2'>
+                    <li className='flex items-start text-left justify-start'>
+                      Settings
+                    </li>
+                    <li className='flex flex-row items-start text-left justify-center'>
+                      Support
+                      <CiExport size={20}/>
+                    </li>
+                  </ul>
+                </li>
+                <li className='flex text-sm items-center justify-start px-2'>
+                  Logout
+                </li>
+              </ul>
+              
             </div>
             )}
           </li>
