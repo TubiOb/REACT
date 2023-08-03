@@ -37,7 +37,7 @@ const Sidebar = () => {
   // };
 
   return (
-    <div className={`w-${isSidebarExpanded ? 'md:w-64' : '20'} flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed`}>
+    <div className='hidden md:w-64 md:flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed'>
         <img src={logo} alt="BOI Ins Broker" className='w-[95%] md:w-[80%] mx-auto mt-4'/>
 
         <ul className='grid grid-cols-1 justify-between gap-16 h-auto mx-auto w-[80%] -mt-16 md:-mt-36'>

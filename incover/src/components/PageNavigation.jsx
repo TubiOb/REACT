@@ -3,7 +3,7 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi'
 
 const PageNavigation = () => {
   return (
-    <div className='flex flex-row items-center h-screen justify-between w-[95%] mx-auto'>
+    <div className='flex flex-row items-center justify-between w-[95%] mx-auto mt-16 md:mt-2'>
         <div className='flex items-center justify-center'>
             <h3 className='text-sm'><span className='font-semibold'>Records: </span>1-13 of 35</h3>
         </div>

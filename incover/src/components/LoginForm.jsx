@@ -80,7 +80,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 items-center justify-between w-70% mx-auto gap-8'>
+    <div className='grid grid-cols-1 items-center justify-between w-full gap-8'>
       <input type="email" value={email} placeholder='Enter email' onChange={handleEmailChange} className={`p-1 border border-slate-600 outline-none rounded-md w-[250px] ${validEmail ? 'border-green-600' : 'border-red-600'}`} />
       {!email && !validEmail && touchedEmail && showNextButton && (
         <p className="text-red-500 text-xs -mt-9 left-0">Please enter your email</p>
@@ -94,7 +94,7 @@ const LoginForm = () => {
             !email && !validEmail ? '-mt-7' : 'mt-0' 
           }`}>Sign in</button> )}
 
-        {showNextButton && (<p className="text-center text-xs -mt-9 left-0 cursor-pointer" >
+        {showNextButton && (<p className="text-xs -mt-9 left-0 cursor-pointer" >
           Don’t have an account? <span /*onClick={handleToggleForm}*/ className='text-green-700'>Sign Up</span> 
         </p> )}
 

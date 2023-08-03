@@ -36,9 +36,9 @@ const MotorPolicyStatus = () => {
         </div>
 
       {activeTab === 'active' && (
-        <div className="tab-content relative flex flex-col items-center h-screen justify-start w-[95%] mx-auto mt-3">
-          <div className='flex md:flex-row flex-wrap items-start justify-between py-2 px-4 w-full'>
-            <div className='flex items-center justify-between gap-3 md:gap-9'>
+        <div className="tab-content relative flex flex-col items-center h-screen justify-start w-[95%] gap-2 mx-auto mt-3">
+          <div className='flex md:flex-row flex-wrap items-start justify-between py-2 px-4 gap-2 w-full'>
+            <div className='flex flex-wrap items-center justify-between gap-3 md:gap-9'>
               <div className='flex flex-row gap-1 items-center justify-between p-2 rounded-lg text-neutral-500 border border-neutral-300'>
                 <CiFilter size={20} className='font-light'/>
                 <h3 className='text-sm'>Filter Table</h3>
@@ -63,9 +63,9 @@ const MotorPolicyStatus = () => {
       )}
 
       {activeTab === 'expired' && (
-        <div className="tab-content relative flex flex-col items-center h-screen justify-start w-[95%] mx-auto mt-3">
-          <div className='flex md:flex-row flex-wrap items-start justify-between py-2 px-4 w-full'>
-            <div className='flex items-center justify-between gap-3 md:gap-9'>
+        <div className="tab-content relative flex flex-col items-center h-screen justify-start w-[95%] gap-2 mx-auto mt-3">
+          <div className='flex md:flex-row flex-wrap items-start justify-between py-2 px-4 gap-2 w-full'>
+            <div className='flex flex-wrap items-center justify-between gap-3 md:gap-9'>
               <div className='flex flex-row gap-1 items-center justify-between p-2 rounded-lg text-neutral-500 border border-neutral-300'>
                 <CiFilter size={20} className='font-light'/>
                 <h3 className='text-sm'>Filter Table</h3>

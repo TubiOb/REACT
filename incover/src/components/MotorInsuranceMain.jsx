@@ -5,7 +5,7 @@ import PageNavigation from './PageNavigation'
 import Support from './Support'
 const MotorInsuranceMain = () => {
   return (
-    <div className='flex flex-col w-full ml-40 md:ml-64 gap-y-0 mb-10'>
+    <div className='flex flex-col w-full ml-0 md:ml-64 ga-2 mb-10'>
         <MotorInsuranceHeading />
         <MotorPolicyStatus />
         <PageNavigation />
