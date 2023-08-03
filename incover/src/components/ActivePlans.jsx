@@ -6,7 +6,7 @@ const ActivePlans = () => {
     const tableData = [
       {id: 1, policyNumber: '02345D54', policyType: 'Health Care', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
       {id: 2, policyNumber: '02345D54', policyType: 'Health Care', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
-  ];
+    ];
   return (
     <div className='w-full px-6 py-4 h-auto items-center justify-between grid grid-cols-1'>
         <div className='flex flex-wrap items-center justify-between p-2 mb-1'>

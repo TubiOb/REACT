@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Protection from '../assets/protection 1.svg'
 import Selection from '../assets/select-all 1.svg'
 import Claims from '../assets/claim (2) 1.svg'
@@ -10,10 +11,12 @@ const QuickAction = () => {
       </h3>
       <div className='grid md:grid-cols-3 grid-cols-1 items-start justify-between w-[50%] gap-2 mt-2 p-4'>
         
-        <div className='grid grid-cols-1 items-center text-center justify-center gap-1 p-4 shadow-xl w-32 h-32 rounded-lg hover:cursor-pointer'>
-          <img src={Protection} alt="" className='mx-auto'/>
-          <p className='font-medium text-xs'>Motor Insurance</p>
-        </div>
+        <Link to='/policies/motorInsurance'>
+          <div className='grid grid-cols-1 items-center text-center justify-center gap-1 p-4 shadow-xl w-32 h-32 rounded-lg hover:cursor-pointer'>
+            <img src={Protection} alt="" className='mx-auto'/>
+            <p className='font-medium text-xs'>Motor Insurance</p>
+          </div>
+        </Link>
         <div className='grid grid-cols-1 items-center text-center justify-center gap-1 p-4 shadow-xl w-32 h-32 rounded-lg hover:cursor-pointer'>
           <img src={Selection} alt="" className='mx-auto'/>
           <p className='font-medium text-xs'>View all products</p>
