@@ -40,7 +40,7 @@ const Sidebar = () => {
     <div className='hidden md:w-64 md:flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed'>
         <img src={logo} alt="BOI Ins Broker" className='w-[95%] md:w-[80%] mx-auto mt-4'/>
 
-        <ul className='grid grid-cols-1 justify-between gap-16 h-auto mx-auto w-[80%] -mt-16 md:-mt-36'>
+        <ul className='grid grid-cols-1 justify-between gap-16 h-auto mx-auto w-[80%] sticky'>
           <ul className='w-full gap-1.5'>
             <Link to='/dashboard'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'dashboard' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('dashboard')}><MdOutlineSpaceDashboard size={15} /><p className='md:flex hidden'>dashboard</p></li></Link>
             <Link to='/setup-guide'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'setup-guide' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('setup-guide')}><BsSubtract size={15}/><p className='md:flex hidden'>setup guide</p></li></Link>
@@ -54,7 +54,7 @@ const Sidebar = () => {
         </ul>
         
 
-        <ul className='md:w-[95%] w-[80%] mx-auto'>
+        <ul className='md:w-[95%] w-[80%] mx-auto sticky'>
           <li className='Profile flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:cursor-pointer hover:rounded-md' onClick={handleSidebarToggle}>
             <div className='flex flex-row p-0.5 md:p-1 justify-center gap-3 items-center' onClick={handleLiItemClick}>
               <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>

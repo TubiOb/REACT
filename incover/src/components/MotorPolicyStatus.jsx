@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { CiSearch, CiFilter } from 'react-icons/ci'
 import { PiUploadSimpleLight } from 'react-icons/pi'
 import { GoChevronDown } from 'react-icons/go'
-import Table from './MotorInsuranceTable'
+import MotorInsuranceTable from './MotorInsuranceTable'
+import PolicyNumber from './PolicyNumber'
+import { useDataContext } from './DataContext'
 
 const MotorPolicyStatus = () => {
     const [activeTab, setActiveTab] = useState('active');
+    const { selectedPolicy } = useDataContext();
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -57,8 +60,16 @@ const MotorPolicyStatus = () => {
             </div>
           </div>
           <div className='w-full mx-auto mt-9'>
-            <Table data={tableData} />
+            <MotorInsuranceTable data={tableData} />
+            {/* <PolicyNumber tableData={tableData} /> */}
           </div>
+
+          {selectedPolicy && (
+            <div className='w-full mx-auto mt-9'>
+              <PolicyNumber policy={selectedPolicy} />
+            </div>
+          )}
+
         </div>
       )}
 
@@ -84,8 +95,16 @@ const MotorPolicyStatus = () => {
             </div>
           </div>
           <div className='w-full mx-auto mt-9'>
-            <Table data={tableData} />
+            <MotorInsuranceTable data={tableData} />
+            {/* <PolicyNumber tableData={tableData} /> */}
           </div>
+
+          {selectedPolicy && (
+            <div className='w-full mx-auto mt-9'>
+              <PolicyNumber policy={selectedPolicy} />
+            </div>
+          )}
+
         </div>
       )}
     </div>

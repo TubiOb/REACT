@@ -25,21 +25,21 @@ const MotorInsuranceSidebar = () => {
 
   return (
     <div className="hidden md:w-64 md:flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed">
-        <img src={logo} alt="BOI Ins Broker" className='w-[150px] sticky mx-auto mt-4'/>
+        <img src={logo} alt="BOI Ins Broker" className='w-[95%] md:w-[80%] sticky mx-auto mt-3'/>
 
-        <div className='flex flex-row items-center justify-start gap-3 md:gap-6 p-1 w-[80%] mx-auto -mt-16 md:-mt-36'>
+        <div className='flex flex-row items-center justify-start gap-3 md:gap-6 p-1 w-[80%] mx-auto relative'>
             <Backbutton />
             <h3 className='text-xs md:text-sm font-light'>My Policies</h3>
         </div>
 
-        <ul className='grid grid-cols-1 justify-between gap-2 h-auto mx-auto w-[80%] -mt-16 md:-mt-36'>
+        <ul className='grid grid-cols-1 justify-between gap-2 h-auto mx-auto w-[80%] sticky'>
             <Link to='#'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'motor insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('motor insurance')}><RiShieldCheckLine size={15}/> Motor Insurance</li></Link>
             <Link to='#'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
             <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance1' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance1')}><RiShieldCheckLine size={15} /> Health Insurance</li></Link>
             <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance2' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance2')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
         </ul>
 
-        <ul className='w-[95%] mx-auto'>
+        <ul className='w-[95%] mx-auto sticky'>
           <li className='flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:cursor-pointer hover:rounded-md' >
             <div className='flex flex-row p-0.5 md:p-1 justify-center gap-3 items-center' onClick={handleLiItemClick}>
               <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
