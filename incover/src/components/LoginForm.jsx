@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FaRegEyeSlash } from 'react-icons/fa';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/gi;
@@ -103,7 +103,8 @@ const LoginForm = () => {
         <div className='grid grid-cols-1 items-center justify-between w-70% ml-0 mx-auto gap-8'>
           <div className='p-0.5 flex items-center justify-center h-9 w-[250px] mt-0 border border-slate-600 outline-none rounded-md'>
             <input type={passwordVisible ? 'text' : 'password'} value={password} placeholder='Enter password' onChange={handlePasswordChange} className={`p-1 w-full outline-none border-none ${validPassword ? 'border-green-400' : 'border-red-500'}`} />
-            <FaRegEyeSlash onClick={togglePasswordVisibility} className='cursor-pointer left-0 text-lg mr-1' />
+            {passwordVisible ? (<FaRegEyeSlash onClick={togglePasswordVisibility} className='cursor-pointer left-0 text-lg mr-1' />) :
+            (<FaRegEye onClick={togglePasswordVisibility} className='cursor-pointer left-0 text-lg mr-1'/>)}
           </div>
           
           {!password && !validPassword && touchedPassword && (

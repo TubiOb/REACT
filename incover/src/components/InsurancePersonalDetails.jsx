@@ -3,7 +3,7 @@ import { RiShieldCheckFill } from 'react-icons/ri'
 
 const InsurancePersonalDetails = () => {
   return (
-    <div className='w-full md:w-[30%] h-screen flex flex-col items-center justify-center md:justify-start p-4 gap-2 md:border-r md:border-neutral-200'>
+    <div className='w-full md:w-[30%] h-auto flex flex-col items-center justify-center md:justify-start p-4 gap-2 md:border-r md:border-neutral-200'>
          <div className='w-full h-auto flex flex-row items-center text-sm justify-between p-2 border-b border-b-neutral-200'>
             <h3>Policyholder's details</h3>
             <div className='items-center justify-center rounded-full bg-blue-200 p-2'>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { AiOutlineEye } from 'react-icons/ai'
+import { CiMenuKebab } from 'react-icons/ci'
 import { useDataContext } from './DataContext';
 
 const InsurancePolicyDetails = () => {
@@ -10,7 +11,7 @@ const InsurancePolicyDetails = () => {
   }
 
   return (
-    <div className='w-full md:w-[70%] flex flex-col h-screen items-center justify-center md:justify-start p-4 gap-4'>
+    <div className='w-full md:w-[70%] flex flex-col items-center justify-center md:justify-start p-4 gap-4'>
       <h3 className='font-semibold text-xl text-left mt-2 mr-auto'>Claim details</h3>
 
       <div className='w-full rounded-lg items-center justify-start flex flex-col border border-neutral-300'>
@@ -107,6 +108,115 @@ const InsurancePolicyDetails = () => {
           </div>
         </div>
       </div>
+
+      <div className='w-full flex flex-col text-left mt-4 mb-2'>
+        <h3 className='font-bold text-base'>Witnesses's List</h3>
+        <table className="border-collapse border border-gray-300 w-full text-sm rounded-lg">
+          <thead>
+            <tr className="bg-gray-100 text-neutral-500 font-extralight text-sm">
+              <th className="p-2">S/N</th>
+              <th className="p-2">Full Name</th>
+              <th className="p-2">Address</th>
+              <th className="p-2">Victim of the accident?</th>
+              <th className="p-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border border-gray-300">
+              <td className="p-2">01</td>
+              <td className="p-2">Stef Stevia</td>
+              <td className="p-2">Ikoyi comfort zone</td>
+              <td className="p-2">Yes</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+            <tr className="border border-gray-300">
+              <td className="p-2">02</td>
+              <td className="p-2">Stef Stevia</td>
+              <td className="p-2">Ikoyi comfort zone</td>
+              <td className="p-2">Yes</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className='w-full flex flex-col text-left mt-4 mb-2'>
+        <h3 className='font-bold text-base'>Other parties involved in the Accident</h3>
+        <table className="border-collapse border border-gray-300 w-full text-sm rounded-lg">
+          <thead>
+            <tr className="bg-gray-100 text-neutral-500 font-normal text-sm">
+              <th className="p-2">S/N</th>
+              <th className="p-2">Motor Make</th>
+              <th className="p-2">Reg. Number</th>
+              <th className="p-2">Address</th>
+              <th className="p-2">Insurer</th>
+              <th className="p-2">Damage Details</th>
+              <th className="p-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border border-gray-300">
+              <td className="p-2">01</td>
+              <td className="p-2">Tesla</td>
+              <td className="p-2">Model S</td>
+              <td className="p-2">Comfort zone</td>
+              <td className="p-2">Linkage Insurance</td>
+              <td className="p-2">Side Scratch</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+            <tr className="border border-gray-300">
+              <td className="p-2">02</td>
+              <td className="p-2">Tesla</td>
+              <td className="p-2">Model S</td>
+              <td className="p-2">Comfort zone</td>
+              <td className="p-2">Linkage Insurance</td>
+              <td className="p-2">Side Scratch</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className='w-full flex flex-col text-left mt-4 mb-2'>
+        <h3 className='font-bold text-base'>Other parties involved in the Accident</h3>
+        <table className="border-collapse border border-gray-300 w-full text-sm rounded-lg">
+          <thead>
+            <tr className="bg-gray-100 text-neutral-500 font-extralight text-sm">
+              <th className="p-2">S/N</th>
+              <th className="p-2">Reg. Number</th>
+              <th className="p-2">Load capacity</th>
+              <th className="p-2">Vehicle make</th>
+              <th className="p-2">Vehicle Year</th>
+              <th className="p-2">Trailer</th>
+              <th className="p-2">Were goods carried?</th>
+              <th className="p-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border border-gray-300">
+              <td className="p-2">01</td>
+              <td className="p-2">123-232-234</td>
+              <td className="p-2">12</td>
+              <td className="p-2">Nissan</td>
+              <td className="p-2">2003</td>
+              <td className="p-2">3</td>
+              <td className="p-2">Yes</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+            <tr className="border border-gray-300">
+              <td className="p-2">02</td>
+              <td className="p-2">123-232-234</td>
+              <td className="p-2">12</td>
+              <td className="p-2">Nissan</td>
+              <td className="p-2">2003</td>
+              <td className="p-2">3</td>
+              <td className="p-2">Yes</td>
+              <td className="p-2"><CiMenuKebab size={18} className='relative'/></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   )
 }

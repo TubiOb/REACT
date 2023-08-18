@@ -5,6 +5,7 @@ import { GoChevronDown } from 'react-icons/go'
 import MotorInsuranceTable from './MotorInsuranceTable'
 import PolicyNumber from './PolicyNumber'
 import { useDataContext } from './DataContext'
+import InsurancePolicyDetails from './InsurancePolicyDetails'
 
 const MotorPolicyStatus = () => {
     const [activeTab, setActiveTab] = useState('active');
@@ -67,6 +68,7 @@ const MotorPolicyStatus = () => {
           {selectedPolicy && (
             <div className='w-full mx-auto mt-9'>
               <PolicyNumber policy={selectedPolicy} />
+              <InsurancePolicyDetails policy={selectedPolicy} />
             </div>
           )}
 
@@ -102,6 +104,7 @@ const MotorPolicyStatus = () => {
           {selectedPolicy && (
             <div className='w-full mx-auto mt-9'>
               <PolicyNumber policy={selectedPolicy} />
+              <InsurancePolicyDetails policy={selectedPolicy} />
             </div>
           )}
 
