@@ -36,7 +36,8 @@ const Table = ({ data }) => {
 
   return (
     // <div className='overflow-x-auto md:overflow-x-hidden rounded-lg shadow-md border mt-2'>
-      <table className=' table-auto w-full items-center md:gap-x-0 gap-x-4 overflow-x-auto md:overflow-x-hidden rounded-lg shadow-md border mt-2'>
+    <div className='w-full overflow-x-auto rounded-lg h-auto shadow-md items-center border mt-2'>
+      <table className=' table-auto w-full items-center md:gap-x-0 gap-x-4'>
         <thead className='text-sm bg-neutral-200'>
           <tr>
             <th className='p-1 md:p-4'>Policy Number</th>
@@ -80,7 +81,7 @@ const Table = ({ data }) => {
           ))}
         </tbody>
       </table>
-    // </div>
+    </div>
    
   )
 }
