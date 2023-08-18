@@ -6,6 +6,7 @@ import { MdOutlineDeleteForever } from 'react-icons/md'
 import PolicyNumber from './PolicyNumber'
 import { useDataContext } from './DataContext'
 import { useNavigate } from 'react-router-dom'
+import InsurancePolicyDetails from './InsurancePolicyDetails'
 
 const MotorInsuranceTable = ({ data }) => {
     const [activeRow, setActiveRow] = useState(null);
@@ -68,6 +69,7 @@ const MotorInsuranceTable = ({ data }) => {
                         <MdOutlineDeleteForever size={20} color='red' /> Delete
                       </li>
                       <PolicyNumber policy={policy} />
+                      <InsurancePolicyDetails policy={policy} />
                     </div>
                   )}
 

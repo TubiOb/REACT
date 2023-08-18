@@ -110,7 +110,7 @@ const LoginForm = () => {
             <p className="text-red-500 text-xs -mt-7 left-0">Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.</p>
           )}
 
-          <Link to='/dashboard'><button onClick={handleLoginClick} className='rounded-md py-2 px-4 text-white outline-none border-none bg-green-700 hover:bg-green-800 transition ease-in-out'>Sign in</button></Link>
+          <Link to='/dashboard' className='rounded-md py-2 px-4 text-white text-center outline-none border-none bg-green-700 hover:bg-green-800 transition ease-in-out'><button onClick={handleLoginClick} >Sign in</button></Link>
           <p className="text-center text-xs -mt-9 left-0 cursor-pointer" >
           Forgot password? <span /*onClick={handleToggleForgotPassword}*/ className='text-green-700'>Click here</span>
         </p>
