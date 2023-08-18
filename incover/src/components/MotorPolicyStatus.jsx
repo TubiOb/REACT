@@ -22,7 +22,7 @@ const MotorPolicyStatus = () => {
 
     const tableData = [
       {id: 1, policyNumber: 'LI/HG/2020/R1RKL', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
-      {id: 2, policyNumber: 'LI/HG/2020/R1RKL', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
+      {id: 2, policyNumber: 'LI/HG/2023/R2RKD', policyProvider: 'Linkage Insurance', premium: '₦2,000', effectiveDate: '24/09/2022', expiryDate: '25/09/2023'},
       {id: 3, policyNumber: 'LI/HG/2020/R1RKL', policyProvider: 'Sovereign trust Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
       {id: 4, policyNumber: 'LI/HG/2020/R1RKL', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
       {id: 5, policyNumber: 'LI/HG/2020/R1RKL', policyProvider: 'Linkage Insurance', premium: '₦1,000', effectiveDate: '23/09/2022', expiryDate: '24/09/2023'},
