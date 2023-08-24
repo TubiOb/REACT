@@ -1,14 +1,10 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Newsletter from "./components/Newsletter";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
    <div>
-    <Navbar />
-    <Hero />
-    <Newsletter />
+    <LandingPage />
    </div>
   );
 }
