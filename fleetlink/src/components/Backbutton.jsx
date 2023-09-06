@@ -10,7 +10,7 @@ const Backbutton = () => {
     }
 
   return (
-    <div className='bg-neutral-800 items-center justify-center flex p-1 md:p-1.5 rounded-tr-xl rounded-bl-xl self-start' onClick={handleGoBack}>
+    <div className='bg-neutral-800 items-center justify-center flex p-1 md:p-1.5 rounded-tr-xl rounded-bl-xl self-start mt-2' onClick={handleGoBack}>
         <BiLeftArrowAlt className='text-white' size={15} />
     </div>
   )
