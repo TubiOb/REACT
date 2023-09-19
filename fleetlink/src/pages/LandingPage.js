@@ -12,7 +12,6 @@ const LandingPage = () => {
 
   const handleLoginClick = () => {
     setLoading(true);
-    alert("YESSSSSSS");
 
     setTimeout(() => {
     setLoading(false); // Reset loading after 3 seconds
@@ -23,7 +22,6 @@ const LandingPage = () => {
 
   const handleSignupClick = () => {
     setLoading(true);
-    alert("LET'S GOOOOO")
 
     setTimeout(() => {
     setLoading(false); // Reset loading after 3 seconds
