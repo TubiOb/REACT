@@ -38,6 +38,7 @@ const Sidebar = () => {
 
   return (
     <div className='hidden md:w-64 md:flex flex-col bg-gray-50 text-gray-600 px-4 py-3 items-center justify-between top-0 bottom-0 left-0 fixed'>
+      <div className='Frame11627 left-[20px] top-[20px] absolute flex-col justify-start items-start gap-[72px] inline-flex'>
         <img src={logo} alt="BOI Ins Broker" className='w-[95%] md:w-[80%] mx-auto mt-4'/>
 
         <ul className='grid grid-cols-1 justify-between gap-16 h-auto mx-auto w-[80%] sticky'>
@@ -52,9 +53,10 @@ const Sidebar = () => {
             <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-claims' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><RiBillLine size={15}/><p className='md:flex hidden'>my claims</p><IoIosArrowForward size={15} className='ml-3 md:ml-12 md:flex hidden'/></li>
           </ul>
         </ul>
-        
 
-        <ul className='md:w-[95%] w-[80%] mx-auto sticky'>
+        
+      </div>
+      <ul className='md:w-[95%] w-[80%] mx-auto left-[20px] top-[550px] absolute flex-col justify-start items-start gap-6 inline-flex'>
           <li className='Profile flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:cursor-pointer hover:rounded-md' onClick={handleSidebarToggle}>
             <div className='flex flex-row p-0.5 md:p-1 justify-center gap-3 items-center' onClick={handleLiItemClick}>
               <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
