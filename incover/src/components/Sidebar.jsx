@@ -53,15 +53,16 @@ const Sidebar = () => {
             <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-claims' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><RiBillLine size={15}/><p className='md:flex hidden'>my claims</p><IoIosArrowForward size={15} className='ml-3 md:ml-12 md:flex hidden'/></li>
           </ul>
         </ul>
-
         
       </div>
+
+      
       <ul className='md:w-[95%] w-[80%] mx-auto left-[20px] top-[550px] absolute flex-col justify-start items-start gap-6 inline-flex'>
           <li className='Profile flex relative flex-row p-0.5 md:p-1.5 justify-between items-center hover:shadow-2xl hover:cursor-pointer hover:rounded-md' onClick={handleSidebarToggle}>
             <div className='flex flex-row p-0.5 md:p-1 justify-center gap-3 items-center' onClick={handleLiItemClick}>
               <img src={myImage} alt="" className='rounded-full w-5 md:w-7 object-cover'/>
               <p className='capitalize text-xs md:text-sm font-semibold md:flex hidden'>fiyin oluwakemi</p>
-              <RiArrowDownSLine size={20} />
+              <RiArrowUpSLine size={20} />
             </div>
             {isProfileOptionVisible && (
             <div className='flex flex-col rounded-md absolute -top-[170px] left-1/2 right-1/2 transform translate-x-[-50%] shadow-xl bg-white w-full py-2 mx-auto h-auto' onClick={handleIconClick}>
@@ -70,7 +71,7 @@ const Sidebar = () => {
                   <div className='flex flex-row p-0.5 md:p-2 justify-center gap-3 items-center'>
                     <img src={myImage} alt="" className='rounded-full w-4 md:w-6 object-cover'/>
                     <p className='capitalize text-xs font-semibold ml-1'>fiyin oluwakemi</p>
-                    <RiArrowUpSLine size={20} className='cursor-pointer'/>
+                    <RiArrowDownSLine size={20} className='cursor-pointer'/>
                   </div>
                 </li>
                 <li className='flex border-b border-b-neutral-300 text-sm items-center justify-start px-2'>
