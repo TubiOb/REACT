@@ -9,7 +9,7 @@ const QuickAction = () => {
       <h3 className='font-semibold'>
         Quick Actions
       </h3>
-      <div className='md:flex-row flex-col items-center md:items-start justify-evenly w-full md:w-[1144px] md:gap-4 mt-2 p-4        md:justify-start gap-8 inline-flex '>
+      <div className='md:flex-row flex-col items-center md:items-start justify-evenly w-full md:w-full md:gap-4 mt-2 p-4        md:justify-start gap-8 inline-flex '>
         
         <Link to='/policies/motorInsurance'>
           <div className='flex-col items-center text-center justify-center px-4 py-6 bg-white shadow-xl w-[162px] h-[167px] rounded-2xl hover:cursor-pointer hover:shadow-2xl gap-4 inline-flex'>
