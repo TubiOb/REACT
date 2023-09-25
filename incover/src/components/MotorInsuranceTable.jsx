@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { CiMenuKebab } from 'react-icons/ci'
-import { GrFormView } from 'react-icons/gr'
-import { LiaEdit } from 'react-icons/lia'
-import { MdOutlineDeleteForever } from 'react-icons/md'
+// import { GrFormView } from 'react-icons/gr'
+// import { LiaEdit } from 'react-icons/lia'
+// import { MdOutlineDeleteForever } from 'react-icons/md'
 import PolicyNumber from './PolicyNumber'
 import { useDataContext } from './DataContext'
 import { useNavigate } from 'react-router-dom'
 // import InsurancePolicyDetails from './InsurancePolicyDetails'
+import Edit from '../assets/edit.svg'
+import Eye from '../assets/eye.svg'
+import Delete from '../assets/trash.svg'
 
 const MotorInsuranceTable = ({ data }) => {
     const [activeRow, setActiveRow] = useState(null);
@@ -58,15 +61,24 @@ const MotorInsuranceTable = ({ data }) => {
                 <td className={`flex items-center justify-center p-1.5 md:p-4 mx-auto relative hover:cursor-pointer ${activeRow === policy.id ? '' : ''}`} onClick={() => handleRowClick(policy.id)}>
                   <CiMenuKebab size={18} className='relative'/>
                   {activeRow === policy.id && (
-                    <div className='absolute bg-white z-50 rounded-lg shadow-xl p-1 w-24 flex flex-col top-[10%] right-0 transform translate-x-[-45%] items-center justify-between text-center border-separate gap-1'>
-                      <li className='flex items-center justify-center w-[90%] mx-auto text-center p-0.5 gap-1 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-100 hover:text-green-600 hover:rounded-md hover:font-semibold' onClick={() => handleViewClick(policy)}>
-                        <GrFormView size={20} /> View
+                    <div className='absolute bg-white z-50 rounded-lg shadow w-36 h-24 p-2 inline-flex flex-col top-[10%] right-0 transform translate-x-[-45%] items-start justify-center'>
+                      <li className='inline-flex items-center justify-start self-stretch p-2 gap-2 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-200 hover:text-green-800 hover:rounded-md hover:font-semibold' onClick={() => handleViewClick(policy)}>
+                        <div className="Edit w-4 h-4 relative">
+                            <img src={Edit} alt='' className="Edit w-4 h-4 left-0 top-0 absolute"/>
+                        </div>
+                        <div className="CompleteCaims text-neutral-600 text-sm font-normal font-['Red Hat Display'] leading-tight">Edit details</div>
                       </li>
-                      <li className='flex items-center justify-center w-[90%] mx-auto text-center p-0.5 gap-1 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-100 hover:text-green-600 hover:rounded-md hover:font-semibold'>
-                        <LiaEdit size={20} color='green' /> Edit
+                      <li className='inline-flex items-center justify-start self-stretch p-2 gap-2 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-200 hover:text-green-800 hover:rounded-md hover:font-semibold'>
+                        <div className="Edit w-4 h-4 relative">
+                            <img src={Eye} alt='' className="Edit w-4 h-4 left-0 top-0 absolute"/>
+                        </div>
+                        <div className="CompleteCaims text-neutral-600 text-sm font-normal font-['Red Hat Display'] leading-tight">View details</div>
                       </li>
-                      <li className='flex items-center justify-center w-[90%] mx-auto text-center p-0.5 gap-1 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-100 hover:text-green-600 hover:rounded-md hover:font-semibold'>
-                        <MdOutlineDeleteForever size={20} color='red' /> Delete
+                      <li className='inline-flex items-center justify-start self-stretch p-2 gap-2 text-xs md:text-sm font-medium hover:cursor-pointer hover:bg-green-200 hover:text-green-800 hover:rounded-md hover:font-semibold'>
+                        <div className="Edit w-4 h-4 relative">
+                            <img src={Delete} alt='' className="Edit w-4 h-4 left-0 top-0 absolute"/>
+                        </div>
+                        <div className="Terminate text-red-700 text-sm font-normal font-['Red Hat Display'] leading-tight">Delete</div>
                       </li>
                       <PolicyNumber policy={policy} />
                       {/* <InsurancePolicyDetails policy={policy} /> */}
