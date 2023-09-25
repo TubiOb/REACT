@@ -4,7 +4,20 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
 ],
   theme: {
-    extend: {},
+    extend: {
+      // colors: {
+      //   'bus': '',
+      // },
+      // keyframes: {
+      //   'bus-move': {
+      //     '0%': { transform: 'translateX(-120%' },
+      //     '100%': { transform: 'translateX(120%)' },
+      //   },
+      // },
+      // animation: {
+      //   'bus-moving': 'bus-move 4s linear infinite',
+      // },
+    },
   },
   plugins: [],
 }

@@ -9,3 +9,37 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+/* custom.css */
+/* .bg-bus-yellow {
+  background-color: #FCD34D;
+} */
+
+.bg-bus-red {
+  background-color: #B91C1C;
+}
+
+@keyframes bus-move {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.animate-bus-moving {
+  animation: bus-move 3.4s linear;
+}
+
+/* custom.css */
+@media (min-width: 1024px) {
+  @keyframes bus-move {
+    0% {
+      transform: translateX(-200%);
+    }
+    100% {
+      transform: translateX(200%);
+    }
+  }
+}
+
