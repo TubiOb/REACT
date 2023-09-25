@@ -12,7 +12,7 @@ const MotorInsuranceHeading = () => {
       <h2 className='font-semibold capitalize text-xs md:text-lg'>Motor Insurance</h2>
       <div className="Buttons w-[135px] h-11 p-3 bg-green-800 rounded-lg justify-center items-center gap-2 inline-flex">
           <div className="AddSquare w-5 h-5 relative">
-              <img src={Add} className="AddSquare w-5 h-5 left-0 top-0 absolute"/>
+              <img src={Add} alt='' className="AddSquare w-5 h-5 left-0 top-0 absolute"/>
           </div>
           <div className="Button2 text-white text-xs font-medium font-['Red Hat Display'] leading-none">Add new policy</div>
       </div>
