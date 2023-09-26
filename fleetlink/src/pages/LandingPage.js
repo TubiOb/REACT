@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import backgound from '../assets/asia-2181888.jpg'
-import { HashLoader } from 'react-spinners'
+// import { HashLoader } from 'react-spinners'
 import { GoArrowRight } from 'react-icons/go'
 import { useNavigate } from 'react-router-dom'
+import LoaderBus from '../assets/bus-310766_1280.png'
 
 const LandingPage = () => {
 
@@ -17,7 +18,7 @@ const LandingPage = () => {
     setLoading(false); // Reset loading after 3 seconds
       // You can navigate to the login page or perform other actions here
       history('/login')
-    }, 1500);
+    }, 3500);
   };
 
   const handleSignupClick = () => {
@@ -27,7 +28,7 @@ const LandingPage = () => {
     setLoading(false); // Reset loading after 3 seconds
       // You can navigate to the login page or perform other actions here
       history('/signup')
-    }, 1500);
+    }, 3500);
   };
 
 
@@ -59,10 +60,15 @@ const LandingPage = () => {
           
         </div>
       </div>
-      {loading && <div className="absolute inset-0 bg-transparent w-full h-full bg-opacity-80 backdrop-blur-sm" />}
+      {loading && <div className="absolute inset-0 bg-transparent w-full h-full bg-opacity-80 backdrop-blur-lg bg-white" />}
       {loading && (
         <div className="fixed left-1/2 -translate-x-1/2 top-1/2 transform -translate-y-1/2 items-center justify-center">
-          <HashLoader color="#36d7b7" />
+          {/* <HashLoader color="#36d7b7" /> */}
+          <div className="relative w-32 h-16">
+              <img src={LoaderBus} alt='LoaderBus' className="absolute w-32 h-16 rounded-full bg-bus-yellow animate-bus-moving"/>
+              {/* <div className="absolute w-32 h-16 rounded-full bg-bus-red animate-bus-moving reverse"></div> */}
+          </div>
+          
         </div>
       )}
     </div>

@@ -15,7 +15,8 @@ body {
 } */
 
 .bg-bus-red {
-  background-color: #B91C1C;
+  background-color: #495057;
+  color: #495057;
 }
 
 @keyframes bus-move {
