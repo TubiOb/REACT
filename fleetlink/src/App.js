@@ -20,17 +20,18 @@ function App() {
 
   return (
    <div>
-    {isLoading ? (
-          <Preloader /> 
-        ) : (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Loader><LandingPage /></Loader>} /> 
+        <Route index element={isLoading ? (
+          <Preloader /> 
+        ) : (
+        <Loader><LandingPage /></Loader>
+        )} /> 
         <Route path="/login" element={<Loader><Login /></Loader>} />
         <Route path="/signup" element={<Loader><Signup /></Loader>} />
       </Routes>
     </BrowserRouter>
-    )}
+    
    </div>
   );
 }

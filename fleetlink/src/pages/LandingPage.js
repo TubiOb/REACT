@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import backgound from '../assets/asia-2181888.jpg'
 // import { HashLoader } from 'react-spinners'
 import { GoArrowRight } from 'react-icons/go'
@@ -30,6 +30,11 @@ const LandingPage = () => {
       history('/signup')
     }, 3500);
   };
+
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
 
   return (

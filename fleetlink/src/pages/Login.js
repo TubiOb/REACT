@@ -4,6 +4,7 @@ import LoginForm from '../components/LoginForm'
 
 
 const Login = () => {
+
   return (
     <div className='bg-neutral-800 flex w-full h-screen flex-col md:flex-row gap-1'>
         <Headings>
