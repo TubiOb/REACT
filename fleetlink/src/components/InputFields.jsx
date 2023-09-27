@@ -30,7 +30,7 @@ const InputFields = ({ placeholder, setLoading }) => {
                 type={placeholder === 'Password' ? (passwordVisible ? 'text' : 'password') : 'text'}
                 className='w-full border-none outline-none p-1 text-sm bg-neutral-200'
                 placeholder={placeholder}/>
-                {placeholder === 'Password' && (
+                {(placeholder === 'Password' || placeholder === 'Confirm Password') && (
                     <div className='w-5 h-5 relative secure'>
                         {passwordVisible ? (
                         <AiOutlineEyeInvisible className="cursor-pointer left-0 w-5 h-5 mr-1"  onClick={togglePasswordVisibility} />
