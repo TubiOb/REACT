@@ -32,7 +32,7 @@ const InputFields = ({ placeholder, onInputChange, setLoading }) => {
             <div className='w-full h-9 px-3 flex flex-row items-center justify-between gap-2.5 bg-neutral-200 rounded-md'>
                 <input 
                 ref={inputRef}
-                type={placeholder === 'Password' ? (passwordVisible ? 'text' : 'password') : 'text'}
+                type={(placeholder === 'Password' || placeholder === 'Confirm Password') ? (passwordVisible ? 'text' : 'password') : 'text'}
                 className='w-full border-none outline-none p-1 text-sm bg-neutral-200'
                 placeholder={placeholder}
                 onChange={handleInputChange}/>
