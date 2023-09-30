@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
-const InputFields = ({ placeholder, setLoading }) => {
+const InputFields = ({ placeholder, onInputChange, setLoading }) => {
     const inputRef = useRef(null);
+
+    const handleInputChange = (event) => {
+    const { value } = event.target;
+        onInputChange(value);
+    };
 
     useEffect(() => {
         if (inputRef.current) {
@@ -29,7 +34,8 @@ const InputFields = ({ placeholder, setLoading }) => {
                 ref={inputRef}
                 type={placeholder === 'Password' ? (passwordVisible ? 'text' : 'password') : 'text'}
                 className='w-full border-none outline-none p-1 text-sm bg-neutral-200'
-                placeholder={placeholder}/>
+                placeholder={placeholder}
+                onChange={handleInputChange}/>
                 {(placeholder === 'Password' || placeholder === 'Confirm Password') && (
                     <div className='w-5 h-5 relative secure'>
                         {passwordVisible ? (
