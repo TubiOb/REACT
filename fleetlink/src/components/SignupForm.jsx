@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import InputFields from '../components/InputFields'
 import { firestore } from '../firebase'
-import { getDocs ,addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
 import { auth } from '../firebase.js'
-// import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 
 const SignupForm = () => {
@@ -30,7 +30,7 @@ const SignupForm = () => {
     const handleSave = async(e) => {
         e.preventDefault();
         console.log(formData);
-        // await createUserWithEmailAndPassword(auth, )
+        await createUserWithEmailAndPassword(auth, formData.emailAddress, formData.password);
         
 
         try {

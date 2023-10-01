@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import InputFields from '../components/InputFields'
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { database } from '../firebase';
+import { getDoc } from 'firebase/firestore'
 
-const LoginForm = () => {
+const LoginForm = async () => {
 
   const [formData, setFormData] = useState({
         emailAddress: '',
@@ -15,14 +18,30 @@ const LoginForm = () => {
         });
     };
 
-    const handleSave = (e) => {
+    // const checkUserData = async (userId) => {
+    //     // const userRef = useRef(database, `Staff Details/${userId}`);
+    //     // const snapshot = await get(userRef);
+    // }
+
+    const handleLogin = (e) => {
         e.preventDefault();
         console.log(formData);
     };
+
+    try {
+        // const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
+
+        // const user = userCredential.user;
+
+        // checkUserData(user);
+    }
+    catch (err) {
+        console.error(err.message);
+    }
     
   return (
     <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 mb-3 relative'>
-        <form onSubmit={handleSave} className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-64 gap-4 px-2 py-5'>
+        <form onSubmit={handleLogin} className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-64 gap-4 px-2 py-5'>
             <InputFields placeholder='Email Address' onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
             <InputFields placeholder='Password' onInputChange={(value) => handleInputChange(value, 'password')}/>
 
