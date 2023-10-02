@@ -1,12 +1,15 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import InputFields from '../components/InputFields'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { database } from '../firebase';
-import { getDoc } from 'firebase/firestore'
+import { firestore } from '../firebase';
+import { auth } from '../firebase'
+import { getDocs, collection, query, where } from 'firebase/firestore'
 
-const LoginForm = async () => {
+const LoginForm = () => {
 
-  const [formData, setFormData] = useState({
+    const ref = collection(firestore, 'Staff Details');
+
+    const [formData, setFormData] = useState({
         emailAddress: '',
         password: '',
     });
@@ -18,30 +21,52 @@ const LoginForm = async () => {
         });
     };
 
-    // const checkUserData = async (userId) => {
-    //     // const userRef = useRef(database, `Staff Details/${userId}`);
-    //     // const snapshot = await get(userRef);
-    // }
-
-    const handleLogin = (e) => {
+    
+    const handleLogin = async(e) => {
         e.preventDefault();
+
         console.log(formData);
-    };
 
-    try {
-        // const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
+        const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
 
-        // const user = userCredential.user;
+        try {
+            // const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
 
-        // checkUserData(user);
-    }
-    catch (err) {
-        console.error(err.message);
+            // const user = userCredential.user;
+            // const userId = user.uid;
+
+            // const userRef = doc(firestore, `Staff Details/${userId}`);
+            // console.log(userRef);
+            // const snapshot = await getDocs(ref, userRef);
+
+            const user = await getDocs(snapshot);
+
+            console.log(snapshot);
+
+            if (user.empty) {
+                console.log('User Data not Found!');
+                
+            }
+            else {
+                user.forEach((doc) => {
+                    const userData = doc.data();
+                    console.log('User Data:', userData)
+                    
+                });
+                console.log('Successfully Sign In');
+            }
+
+            
+        }
+        catch (err) {
+            console.error(err.message);
+            console.error(err.stack);
+        }
     }
     
   return (
     <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 mb-3 relative'>
-        <form onSubmit={handleLogin} className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-64 gap-4 px-2 py-5'>
+        <form onSubmit={handleLogin} method='GET' className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-64 gap-4 px-2 py-5'>
             <InputFields placeholder='Email Address' onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
             <InputFields placeholder='Password' onInputChange={(value) => handleInputChange(value, 'password')}/>
 
