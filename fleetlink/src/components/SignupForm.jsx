@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputFields from '../components/InputFields'
 import { firestore } from '../firebase'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, doc, setDoc, collection } from 'firebase/firestore'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
@@ -29,13 +29,35 @@ const SignupForm = () => {
     
     const handleSave = async(e) => {
         e.preventDefault();
-        // console.log(formData);
-        await createUserWithEmailAndPassword(auth, formData.emailAddress, formData.password);
-        
+        // console.log(formData);        
 
         try {
+            const userCredential = await createUserWithEmailAndPassword(auth, formData.emailAddress, formData.password);
+
+            const userId = userCredential.user.uid;
+
+            const userDocRef = doc(firestore, `Staff/${userId}`);
+
+            await setDoc(userDocRef, {
+                fullName: formData.fullName,
+                emailAddress: formData.emailAddress,
+                phoneNumber: formData.phoneNumber,
+                address: formData.address,
+            });
+
+            setFormData({
+                fullName: '',
+                emailAddress: '',
+                phoneNumber: '',
+                address: '',
+                password: '',
+                confirmPassword: '',
+            });
+
             await addDoc(ref, formData)
             console.log(formData);
+
+            console.log("User successfully signed up")
         }
         catch(err) {
             // console.log(formData)
