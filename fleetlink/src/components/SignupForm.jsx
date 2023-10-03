@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputFields from '../components/InputFields'
 import { firestore } from '../firebase'
-import { addDoc, doc, setDoc, collection } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import Toast from './Toast'
@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const SignupForm = () => {
 
-    const ref = collection(firestore, 'Staff Details');
+    // const ref = collection(firestore, 'Staff');
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -48,16 +48,9 @@ const SignupForm = () => {
                 address: formData.address,
             });
 
-            setFormData({
-                fullName: null,
-                emailAddress: null,
-                phoneNumber: null,
-                address: null,
-                password: null,
-                confirmPassword: null,
-            });
+            
 
-            await addDoc(ref, formData)
+            // await addDoc(ref, formData)
             // console.log(formData);
 
             // console.log("User successfully signed up");
@@ -68,6 +61,15 @@ const SignupForm = () => {
             // console.error(err);
             showToastMessage('Sign Up failed!', 'error')
         }
+
+        setFormData({
+            fullName: '',
+            emailAddress: '',
+            phoneNumber: '',
+            address: '',
+            password: '',
+            confirmPassword: '',
+        });
     };
 
     const showToastMessage = (message, type) => {
@@ -76,12 +78,14 @@ const SignupForm = () => {
                 toast.success(message, {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
+                    preventDefault: true,
                 });
                 break;
             case 'error':
                 toast.error(message, {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 3000,
+                    preventDefault: true,
                 });
                 break;
             default:

@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const LoginForm = () => {
 
-    const ref = collection(firestore, 'Staff Details');
+    const ref = collection(firestore, 'Staff');
 
     const [formData, setFormData] = useState({
         emailAddress: '',
@@ -38,17 +38,22 @@ const LoginForm = () => {
             const user = userCredential.user;
             const userId = user.uid;
 
-            const userRef = doc(firestore, `Staff Details/${userId}`);
+            const userRef = doc(firestore, `Staff/${userId}`);
             console.log(userRef);
             const snapshot = await getDocs(ref, userRef);
 
             // const thisUser = await getDocs(snapshot);
 
-            console.log(snapshot);
+            // console.log(snapshot);
 
             if (snapshot.empty) {
                 // console.log('User Data not Found!');
-                showToastMessage('Sign In failed!', 'error')
+                showToastMessage('Sign In failed!', 'error');
+
+                setFormData({
+                    emailAddress: null,
+                    password: null,
+                });
                 
             }
             else {
@@ -59,6 +64,11 @@ const LoginForm = () => {
                 });
                 // console.log('Successfully Sign In');
                 showToastMessage('Sign In Successful', 'success');
+
+                setFormData({
+                    emailAddress: null,
+                    password: null,
+                });
             }
 
             
