@@ -3,7 +3,10 @@ import InputFields from '../components/InputFields'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { firestore } from '../firebase';
 import { auth } from '../firebase'
-import { getDocs, collection, query, where } from 'firebase/firestore'
+import { getDocs, doc, collection } from 'firebase/firestore'
+import Toast from './Toast'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const LoginForm = () => {
 
@@ -27,43 +30,68 @@ const LoginForm = () => {
 
         console.log(formData);
 
-        const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
+        // const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
 
         try {
-            // const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
+            const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
 
-            // const user = userCredential.user;
-            // const userId = user.uid;
+            const user = userCredential.user;
+            const userId = user.uid;
 
-            // const userRef = doc(firestore, `Staff Details/${userId}`);
-            // console.log(userRef);
-            // const snapshot = await getDocs(ref, userRef);
+            const userRef = doc(firestore, `Staff Details/${userId}`);
+            console.log(userRef);
+            const snapshot = await getDocs(ref, userRef);
 
-            const user = await getDocs(snapshot);
+            // const thisUser = await getDocs(snapshot);
 
             console.log(snapshot);
 
-            if (user.empty) {
-                console.log('User Data not Found!');
+            if (snapshot.empty) {
+                // console.log('User Data not Found!');
+                showToastMessage('Sign In failed!', 'error')
                 
             }
             else {
-                user.forEach((doc) => {
+                snapshot.forEach((doc) => {
                     const userData = doc.data();
-                    console.log('User Data:', userData)
+                    // console.log('User Data:', userData);
                     
                 });
-                console.log('Successfully Sign In');
+                // console.log('Successfully Sign In');
+                showToastMessage('Sign In Successful', 'success');
             }
 
             
         }
         catch (err) {
             console.error(err.message);
-            console.error(err.stack);
+            // console.error(err.stack);
         }
-    }
+    };
+
+
+
+    const showToastMessage = (message, type) => {
+        switch (type) {
+            case 'success':
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            case 'error':
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
     
+
   return (
     <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 mb-3 relative'>
         <form onSubmit={handleLogin} method='GET' className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-64 gap-4 px-2 py-5'>
@@ -76,6 +104,7 @@ const LoginForm = () => {
             </div>
             
         </form>
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }

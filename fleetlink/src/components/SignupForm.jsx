@@ -4,6 +4,9 @@ import { firestore } from '../firebase'
 import { addDoc, doc, setDoc, collection } from 'firebase/firestore'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import Toast from './Toast'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 
 const SignupForm = () => {
@@ -46,22 +49,43 @@ const SignupForm = () => {
             });
 
             setFormData({
-                fullName: '',
-                emailAddress: '',
-                phoneNumber: '',
-                address: '',
-                password: '',
-                confirmPassword: '',
+                fullName: null,
+                emailAddress: null,
+                phoneNumber: null,
+                address: null,
+                password: null,
+                confirmPassword: null,
             });
 
             await addDoc(ref, formData)
-            console.log(formData);
+            // console.log(formData);
 
-            console.log("User successfully signed up")
+            // console.log("User successfully signed up");
+            showToastMessage('Sign Up Successful', 'success');
         }
         catch(err) {
             // console.log(formData)
-            console.error(err);
+            // console.error(err);
+            showToastMessage('Sign Up failed!', 'error')
+        }
+    };
+
+    const showToastMessage = (message, type) => {
+        switch (type) {
+            case 'success':
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            case 'error':
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            default:
+                break;
         }
     };
 
@@ -79,6 +103,7 @@ const SignupForm = () => {
                 <button type="submit" className='text-white px-2 py-2 rounded-xl w-full mx-auto bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' >Sign Up</button>
             </div>
         </form>
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }
