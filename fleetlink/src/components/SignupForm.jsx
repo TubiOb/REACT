@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import Toast from './Toast'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Link } from 'react-router-dom'
 
 
 const SignupForm = () => {
@@ -106,6 +107,7 @@ const SignupForm = () => {
             <div className='w-[90%] flex flex-col mx-auto'>
                 <button type="submit" className='text-white px-2 py-2 rounded-xl w-full mx-auto bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' >Sign Up</button>
             </div>
+            <Link to="/login" className="block text-sm text-neutral-600 font-semibold mt-4 mx-auto">Have an account? <span className='text-neutral-800 font-semibold hover:underline'>Login</span></Link>
         </form>
         <Toast showToast={showToastMessage} />
     </div>
