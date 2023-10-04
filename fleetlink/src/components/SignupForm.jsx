@@ -95,8 +95,8 @@ const SignupForm = () => {
     };
 
   return (
-    <div className='w-full md:w-[50%] h-screen bg-neutral-800 flex flex-col items-center justify-center p-4 mb-3 relative'>
-        <form onSubmit={handleSave} className='mx-auto my-auto mt-8 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-auto gap-4 px-2 py-5'>
+    <div className='w-full md:w-[50%] h-screen bg-neutral-800 flex flex-col items-center justify-center p-4 relative'>
+        <form onSubmit={handleSave} className='mx-auto bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-auto gap-4 px-2 py-5'>
             <InputFields placeholder='Full Name' onInputChange={(value) => handleInputChange(value, 'fullName')}/>
             <InputFields placeholder='Email Address' onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
             <InputFields placeholder='Phone Number' onInputChange={(value) => handleInputChange(value, 'phoneNumber')}/>

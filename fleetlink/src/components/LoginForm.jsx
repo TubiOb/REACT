@@ -104,8 +104,8 @@ const LoginForm = () => {
     
 
   return (
-    <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 mb-3 relative'>
-        <form onSubmit={handleLogin} method='GET' className='mx-auto mt-8 md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-auto gap-4 px-2 py-5'>
+    <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 relative'>
+        <form onSubmit={handleLogin} method='GET' className='mx-auto md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-auto gap-4 px-2 py-5'>
             <InputFields placeholder='Email Address' onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
             <InputFields placeholder='Password' onInputChange={(value) => handleInputChange(value, 'password')}/>
 
