@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import InputFields from '../components/InputFields'
 import { firestore } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import Toast from './Toast'
@@ -13,6 +14,8 @@ import { Link } from 'react-router-dom'
 const SignupForm = () => {
 
     // const ref = collection(firestore, 'Staff');
+
+    const history = useNavigate();
 
     const [formData, setFormData] = useState({
         fullName: '',
@@ -56,6 +59,11 @@ const SignupForm = () => {
 
             // console.log("User successfully signed up");
             showToastMessage('Sign Up Successful', 'success');
+
+            setTimeout(() => {
+                history('/login');
+                }, 3500);
+                
         }
         catch(err) {
             // console.log(formData)

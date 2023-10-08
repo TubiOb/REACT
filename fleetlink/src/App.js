@@ -5,6 +5,10 @@ import Loader from "./components/Loader";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Preloader from "./components/Preloader";
+import Home from "./pages/Home";
+import PickupSchedule from "./pages/PickupSchedule";
+import Updates from "./pages/Updates";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
 
@@ -29,6 +33,10 @@ function App() {
         )} /> 
         <Route path="/login" element={<Loader><Login /></Loader>} />
         <Route path="/signup" element={<Loader><Signup /></Loader>} />
+        <Route path="/home" element={<Loader><Home /></Loader>} />
+        <Route path="/pickupSchedule" element={<Loader><PickupSchedule /></Loader>} />
+        <Route path="/updates" element={<Loader><Updates /></Loader>} />
+        <Route path="/profile" element={<Loader><UserProfile /></Loader>} />
       </Routes>
     </BrowserRouter>
     
