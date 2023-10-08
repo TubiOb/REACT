@@ -4,12 +4,17 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { firestore } from '../firebase';
 import { auth } from '../firebase'
 import { getDocs, doc, collection } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 import Toast from './Toast'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
+
+    const history = useNavigate();
+
+    // const [setLoading] = useState(false);
 
     const ref = collection(firestore, 'Staff');
 
@@ -30,6 +35,7 @@ const LoginForm = () => {
         e.preventDefault();
 
         console.log(formData);
+        // setLoading(true);
 
         // const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
 
@@ -49,7 +55,7 @@ const LoginForm = () => {
 
             if (snapshot.empty) {
                 // console.log('User Data not Found!');
-                showToastMessage('Sign In failed!', 'error');
+                showToastMessage('Incorrect email or Password', 'error');
 
                 setFormData({
                     emailAddress: null,
@@ -64,6 +70,13 @@ const LoginForm = () => {
                     
                 });
                 // console.log('Successfully Sign In');
+
+                setTimeout(() => {
+                    // setLoading(false);
+
+                    history('/home');
+                }, 3500);
+
                 showToastMessage('Sign In Successful', 'success');
 
                 setFormData({

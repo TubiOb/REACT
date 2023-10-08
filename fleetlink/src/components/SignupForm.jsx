@@ -17,6 +17,8 @@ const SignupForm = () => {
 
     const history = useNavigate();
 
+    // const [setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         fullName: '',
         emailAddress: '',
@@ -38,6 +40,8 @@ const SignupForm = () => {
         e.preventDefault();
         // console.log(formData);        
 
+        // setLoading(true);
+
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, formData.emailAddress, formData.password);
 
@@ -58,12 +62,14 @@ const SignupForm = () => {
             // console.log(formData);
 
             // console.log("User successfully signed up");
+            setTimeout(() => {
+                // setLoading(false);
+
+                history('/login');
+            }, 3500);
+
             showToastMessage('Sign Up Successful', 'success');
 
-            setTimeout(() => {
-                history('/login');
-                }, 3500);
-                
         }
         catch(err) {
             // console.log(formData)
