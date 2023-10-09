@@ -40,6 +40,11 @@ const LoginForm = () => {
         // const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
 
         try {
+            if (!formData.emailAddress || !formData.password) {
+                showToastMessage('Please fill in both email and password.', 'error');
+                return;
+            }
+
             const userCredential = await signInWithEmailAndPassword(auth, formData.emailAddress, formData.password);
 
             const user = userCredential.user;
@@ -58,8 +63,8 @@ const LoginForm = () => {
                 showToastMessage('Incorrect email or Password', 'error');
 
                 setFormData({
-                    emailAddress: null,
-                    password: null,
+                    emailAddress: '',
+                    password: '',
                 });
                 
             }
@@ -80,14 +85,15 @@ const LoginForm = () => {
                 showToastMessage('Sign In Successful', 'success');
 
                 setFormData({
-                    emailAddress: null,
-                    password: null,
+                    emailAddress: '',
+                    password: '',
                 });
             }
 
             
         }
         catch (err) {
+            showToastMessage('Incorrect email or Password', 'error');
             console.error(err.message);
             // console.error(err.stack);
         }
@@ -119,8 +125,8 @@ const LoginForm = () => {
   return (
     <div className='w-full md:w-[50%] h-screen bg-inherit flex flex-col items-center justify-center p-4 relative'>
         <form onSubmit={handleLogin} method='GET' className='mx-auto md:mt-0 bg-white outline-none border-none rounded-xl shadow-sm shadow-neutral-50 w-[85%] md:w-[65%] inline-flex flex-col h-auto gap-4 px-2 py-5'>
-            <InputFields placeholder='Email Address' onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
-            <InputFields placeholder='Password' onInputChange={(value) => handleInputChange(value, 'password')}/>
+            <InputFields placeholder='Email Address' value={formData.emailAddress} onInputChange={(value) => handleInputChange(value, 'emailAddress')}/>
+            <InputFields placeholder='Password' value={formData.password} onInputChange={(value) => handleInputChange(value, 'password')}/>
 
             <div className='w-[90%] flex flex-col mx-auto'>
                 <button type="submit" className='text-white px-2 py-2 rounded-xl w-full mx-auto bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' >Sign In</button>
