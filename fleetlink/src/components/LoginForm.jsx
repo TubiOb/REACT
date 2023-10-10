@@ -60,7 +60,7 @@ const LoginForm = () => {
 
             if (snapshot.empty) {
                 // console.log('User Data not Found!');
-                showToastMessage('Incorrect email or Password', 'error');
+                showToastMessage('Invalid email or Password', 'error');
 
                 setFormData({
                     emailAddress: '',
@@ -72,7 +72,7 @@ const LoginForm = () => {
                 snapshot.forEach((doc) => {
                     const userData = doc.data();
                     // console.log('User Data:', userData);
-                    
+                    showToastMessage('Sign In Successful', 'success');
                 });
                 // console.log('Successfully Sign In');
 
@@ -82,7 +82,7 @@ const LoginForm = () => {
                     history('/home');
                 }, 3500);
 
-                showToastMessage('Sign In Successful', 'success');
+                
 
                 setFormData({
                     emailAddress: '',
