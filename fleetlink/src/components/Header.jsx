@@ -9,7 +9,7 @@ const Header = () => {
           <Link ><h2>FleetLink</h2></Link>
         </div>
 
-          <div className='md:flex p-1 items-center w-full hidden'>
+          <div className='md:flex p-1 items-center hidden'>
             <ul className='flex flex-row items-center justify-between gap-24 p-1'>
               <Link to='/home'><li>Home</li></Link>
               <Link to='/pickupSchedule'><li>Pick-up Schedule</li></Link>

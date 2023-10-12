@@ -4,7 +4,7 @@ import MobileNavigation from '../components/MobileNavigation'
 
 const Home = () => {
   return (
-    <div className='w-full h-screen bg-whote'>
+    <div className='w-full h-screen bg-white flex justify-center'>
         <Header />
         <MobileNavigation />
     </div>
