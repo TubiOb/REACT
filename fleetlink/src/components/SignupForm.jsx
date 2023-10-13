@@ -74,7 +74,13 @@ const SignupForm = () => {
         catch(err) {
             // console.log(formData)
             // console.error(err);
-            showToastMessage('Sign Up failed!', 'error')
+            if (err.message.includes('already in use')) {
+                showToastMessage('User already exists', 'error');
+            }
+            else {
+                showToastMessage('Sign Up failed!', 'error');
+            }
+            
         }
 
         setFormData({

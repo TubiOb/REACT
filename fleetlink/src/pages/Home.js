@@ -5,7 +5,7 @@ import Welcome from '../components/Welcome'
 
 const Home = () => {
   return (
-    <div className='w-full h-screen bg-white flex justify-center'>
+    <div className='w-full h-full bg-white flex justify-center'>
         <Header />
         <Welcome />
         <MobileNavigation />
