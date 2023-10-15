@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import UserProfile from '../assets/IMG_20210903_102641.jpg'
+// import UserProfile from '../assets/IMG_20210903_102641.jpg'
+import { RiUser3Line } from 'react-icons/ri'
 
 const Header = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const Header = () => {
   ];
 
   return (
-    <div className='w-full h-20 flex flex-row items-center justify-between fixed top-0 left-0 gap-2 py-1 px-6 shadow-bottom'>
+    <div className='w-full h-20 flex flex-row items-center justify-between z-40 bg-white fixed top-0 left-0 gap-2 py-1 px-6 shadow-bottom'>
         <div className='flex p-1 text-base md:text-lg font-semibold'>
           <Link to='/home'><h2>FleetLink</h2></Link>
         </div>
@@ -30,9 +31,9 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className='rounded-full w-7 h-7 md:w-9 md:h-9 overflow-hidden'>
-            <a href="/profile" className='flex w-full h-full'>
-              <img src={UserProfile} alt=""  className='object-cover w-full h-full'/>
+          <div className='rounded-full w-7 h-7 md:w-9 md:h-9 overflow-hidden border border-neutral-300'>
+            <a href="/profile" className='flex w-full h-full p-2'>
+              <RiUser3Line  className='object-cover w-full h-full'/>
             </a>
           </div>
         

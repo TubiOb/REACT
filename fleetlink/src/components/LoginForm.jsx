@@ -10,11 +10,12 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Link } from 'react-router-dom';
 
+
 const LoginForm = () => {
 
     const history = useNavigate();
 
-    // const [setLoading] = useState(false);
+    
 
     const ref = collection(firestore, 'Staff');
 
@@ -34,7 +35,7 @@ const LoginForm = () => {
     const handleLogin = async(e) => {
         e.preventDefault();
 
-        console.log(formData);
+        // console.log(formData);
         // setLoading(true);
 
         // const snapshot = query(collection(firestore, 'Staff Details'), where('emailAddress', '==', formData.emailAddress), where('password', '==', formData.password));
@@ -51,7 +52,7 @@ const LoginForm = () => {
             const userId = user.uid;
 
             const userRef = doc(firestore, `Staff/${userId}`);
-            console.log(userRef);
+            // console.log(userRef);
             const snapshot = await getDocs(ref, userRef);
 
             // const thisUser = await getDocs(snapshot);
@@ -73,6 +74,10 @@ const LoginForm = () => {
                     const userData = doc.data();
                     // console.log('User Data:', userData);
                     showToastMessage('Sign In Successful', 'success');
+
+                    if (!localStorage.getItem('firstLogin')) {
+                        localStorage.setItem('firstLogin', 'true');
+                    }
                 });
                 // console.log('Successfully Sign In');
 

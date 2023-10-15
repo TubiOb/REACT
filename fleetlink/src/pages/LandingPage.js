@@ -38,7 +38,7 @@ const LandingPage = () => {
 
 
   return (
-    <div className='h-screen w-full relative bg-neutral-400'>
+    <div className='h-full w-full relative bg-neutral-400'>
       <div className='w-full h-full relative' loading='lazy'>
         <img src={backgound} alt="FleetLink" className='relative object-cover w-full h-full' loading="lazy"/>
         <div className='absolute top-0 left-0 w-full h-full bg-black opacity-70 blur-xl'></div>
