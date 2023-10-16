@@ -4,6 +4,7 @@ import MobileNavigation from '../components/MobileNavigation'
 import Welcome from '../components/Welcome'
 import LiveTracker from '../components/LiveTracker'
 import WelcomeModal from '../components/WelcomeModal'
+import Footer from '../components/Footer'
 
 const Home = () => {
   const [show, setShow] = useState(localStorage.getItem('firstLogin') !== 'true');
@@ -14,6 +15,7 @@ const Home = () => {
         <Welcome />
         <LiveTracker />
         <MobileNavigation />
+        <Footer />
 
         {show && <WelcomeModal show={show} closeModal={() => setShow(false)} />}
     </div>
