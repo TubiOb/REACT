@@ -1,6 +1,7 @@
 import React from 'react'
 import Maps from './Maps'
 import 'leaflet/dist/leaflet.css'
+import TrackingInfo from './TrackingInfo';
 
 const LiveTracker = () => {
   const center = {
@@ -18,6 +19,7 @@ const LiveTracker = () => {
         <div className='flex p-2 w-full h-[450px] items-center justify-center box-border'>
             <Maps center={center} zoom={zoom} className='relative w-full h-full' />
         </div>
+        <TrackingInfo />
     </div>
   )
 }
