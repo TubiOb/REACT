@@ -36,6 +36,12 @@ body {
   box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.3);
 }
 
+/* SIZE OF LEAFLET MAP */
+.leaflet-container {
+  height: 100%;
+  width: 100vw;
+}
+
 
 /* custom.css */
 @media (min-width: 1024px) {

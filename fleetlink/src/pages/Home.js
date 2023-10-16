@@ -6,7 +6,7 @@ import LiveTracker from '../components/LiveTracker'
 import WelcomeModal from '../components/WelcomeModal'
 
 const Home = () => {
-  const [show, setShow] = useState(localStorage.getItem('firstLogin') === 'true');
+  const [show, setShow] = useState(localStorage.getItem('firstLogin') !== 'true');
 
   return (
     <div className='w-full flex-col h-full bg-white flex items-center justify-center'>
