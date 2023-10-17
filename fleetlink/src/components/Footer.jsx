@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className='w-full mt-3 h-auto flex flex-col items-center py-4 px-2 md:px-10 bg-neutral-800 text-white bottom-0 left-0'>
         
-        <div className='w-full grid grid-cols-1 md:grid-cols-2'>
+        <div className='w-full grid grid-cols-1 md:grid-cols-2 mt-3'>
           <div className="text-center md:text-left items-center md:items-start flex flex-col md:w-[30%] md:mb-0 mb-3">
             <h3 className="text-lg font-semibold mb-3">FleetLink</h3>
 
@@ -22,7 +22,7 @@ const Footer = () => {
             </div>
           </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 text-center gap-4 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 text-center gap-4 w-full mt-3">
               <div className='text-left'>
                 <h3 className="text-lg font-semibold mb-3 md:mb-0">Discover</h3>
                 <ul className="text-sm gap-2">
