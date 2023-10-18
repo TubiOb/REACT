@@ -3,7 +3,7 @@ import { CiInstagram, CiTwitter, CiFacebook } from 'react-icons/ci'
 
 const Footer = () => {
   return (
-    <div className='w-full mt-3 h-auto flex flex-col items-center py-4 px-2 md:px-10 bg-neutral-800 text-white bottom-0 left-0'>
+    <div className='w-full mt-3 h-screen flex flex-col items-center py-4 px-2 md:px-10 bg-neutral-800 text-white bottom-0 left-0'>
         
         <div className='w-full grid grid-cols-1 md:grid-cols-2 mt-3'>
           <div className="text-center md:text-left items-center md:items-start flex flex-col md:w-[30%] md:mb-0 mb-3">

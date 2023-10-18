@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 const UserProfile = () => {
   return (
-    <div className='w-full h-screen bg-white flex justify-center'>
+    <div className='w-full h-full bg-white flex items-center justify-center'>
         <Header />
         <MobileNavigation />
         <Footer />

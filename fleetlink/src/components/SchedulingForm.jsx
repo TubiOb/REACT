@@ -8,7 +8,7 @@ const SchedulingForm = () => {
     }
 
   return (
-    <div className='flex flex-col w-[95%] md:w-[45%] items-center justify-center mx-auto mt-24 z-10 p-2 gap-4 bg-white h-auto text-black rounded-2xl border outline-none'>
+    <div className='flex flex-col w-[95%] md:w-[45%] items-center justify-center mx-auto mt-24 my-20 z-10 p-2 gap-4 bg-white h-auto text-black rounded-2xl border outline-none'>
         <div className='w-[30%] p-2 items-center justify-center flex border border-neutral-200'>
             <h3 className='font-bold'>Schedule Pick-up</h3>
         </div>

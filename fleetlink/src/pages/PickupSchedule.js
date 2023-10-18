@@ -6,7 +6,7 @@ import SchedulingForm from '../components/SchedulingForm'
 
 const PickupSchedule = () => {
   return (
-    <div className='w-full h-full bg-white flex flex-col justify-center'>
+    <div className='w-full h-full bg-white flex flex-col items-center justify-center'>
       <Header />
       <SchedulingForm />
       <MobileNavigation />
