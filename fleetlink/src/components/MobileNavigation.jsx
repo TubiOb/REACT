@@ -21,7 +21,7 @@ const MobileNavigation = () => {
     const [active, setActive] = useState(activeIndex !== -1 ? activeIndex : 0);
 
   return (
-    <div className='md:w-[80%] mx-auto max-h-[4.4rem] flex md:hidden justify-center items-center fixed bottom-2 px-6 bg-white rounded-xl drop-shadow-2xl shadow-2xl'>
+    <div className='md:w-[80%] mx-auto max-h-[4.4rem] z-40 flex md:hidden justify-center items-center fixed bottom-2 px-6 bg-white rounded-xl drop-shadow-2xl shadow-2xl'>
         <ul className='flex relative'>
             <span className={`border-neutral-100 duration-500 ${Menus[active].dis} border-4 bg-gray-900 h-16 w-16 absolute -top-5 rounded-full spade`}></span>
             {Menus.map((menu, i) => (
