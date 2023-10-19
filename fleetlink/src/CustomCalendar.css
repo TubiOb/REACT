@@ -25,6 +25,13 @@
   line-height: 2rem; /* Center text vertically in the tile */
 }
 
+.react-calendar__tile:hover {
+   background: #343a40;
+   color: #fff;
+   border-radius: 50%;
+   padding: 5px;
+}
+
 
 /* Style for the current date */
 .react-calendar__tile--now {
@@ -32,11 +39,24 @@
   color: #fff;
   border-radius: 50%;
   padding: 5px;
+  
+}
+
+.react-calendar__tile--now:hover {
+  background: red;
+  color: #fff;
 }
 
 /* Style for the selected date range */
 .react-calendar__tile--active {
   background: #495057;
+  color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.react-calendar__tile--active:hover {
+  background: #343a40;
   color: #fff;
 }
 

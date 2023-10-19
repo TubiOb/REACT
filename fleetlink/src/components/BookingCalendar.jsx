@@ -56,7 +56,7 @@ function BookingCalendar() {
                                 date >= dateRange[0] &&
                                 date <= dateRange[1]
                             ) {
-                                return "bg-neutral-500 text-white rounded-full";
+                                return "text-white rounded-full";
                             }
                             }
                         }}
