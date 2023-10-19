@@ -13,7 +13,7 @@ const SchedulingForm = () => {
         <div className='w-[60%] md:w-[30%] p-2 items-center justify-center flex border border-neutral-200'>
             <h3 className='font-bold'>Schedule Pick-up</h3>
         </div>
-        <div className='w-[90%] mx-auto p-2 grid grid-cols-1 opacity-40 bg-white md:grid-cols-2 items-center justify-between gap-4'>
+        <div className='w-[90%] mx-auto p-2 grid grid-cols-1 bg-white md:grid-cols-2 items-center justify-between gap-4'>
             <div className='border-none outline-none items-center justify-center mb-2 w-full mx-auto gap-2 inline-flex flex-col'>
                 <fieldset className='border-none outline-none w-[80%] flex gap-2'>
                     <legend className='text-neutral-800 font-bold text-sm ml-1 border-none outline-none'>Bus Capacity</legend>
@@ -135,7 +135,7 @@ const SchedulingForm = () => {
                 </fieldset>
             </div>
         </div>
-        <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-6 gap-4'>
+        <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
             <BookingCalendar />
             <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'>Schedule Pick-up</button>
         </div>

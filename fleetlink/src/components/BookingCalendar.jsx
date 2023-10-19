@@ -7,6 +7,7 @@ import '../index.css'
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import '../CustomCalendar.css';
 import { isAfter, isBefore, addDays } from 'date-fns';
 
 function BookingCalendar() {
@@ -31,7 +32,7 @@ function BookingCalendar() {
     };
 
   return (
-    <div className='w-auto rounded-lg p-2'>
+    <div className='w-full flex items-center justify-center'>
         {/* <LocalizationProvider dateAdapter={AdapterDayjs}  >
             <DemoContainer components={['DateRangeCalendar', 'DateRangeCalendar']}>
                 <DemoItem>
@@ -44,11 +45,11 @@ function BookingCalendar() {
             <div className="mb-4 border-none">
                 <div className="calendar bg-white border-none">
                     <Calendar
-                        value={dateRange}
+                        value={dateRange[0]}
+                        onChange={(date) => setDateRange([date, dateRange[1]])}
                         selectRange
                         onClickDay={handleDateClick}
                         // className="bg-neutral-500 text-black border-none"
-                        calendarType="US"
                         tileClassName={({ date, view }) => {
                             if (dateRange[0] && dateRange[1]) {
                             if (
