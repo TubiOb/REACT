@@ -14,7 +14,7 @@ const Header = () => {
   ];
 
   return (
-    <div className='w-full h-20 flex flex-row items-center justify-between z-40 bg-white fixed top-0 left-0 gap-2 py-1 px-6 shadow-bottom'>
+    <div className='w-full h-20 flex flex-row items-center justify-between z-10 bg-white sticky top-0 left-0 gap-2 py-1 px-6 shadow-bottom'>
         <div className='flex p-1 text-base md:text-lg font-semibold'>
           <Link to='/home'><h2>FleetLink</h2></Link>
         </div>

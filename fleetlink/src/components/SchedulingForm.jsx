@@ -4,6 +4,9 @@ import { CgChevronDown } from 'react-icons/cg'
 import BookingCalendar from './BookingCalendar'
 import { collection, addDoc, doc } from 'firebase/firestore';
 import { firestore } from '../firebase.js';
+import Toast from './Toast'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const SchedulingForm = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
@@ -41,8 +44,15 @@ const SchedulingForm = () => {
         const selectedLocation = selectedMenuItem;
         const selectedDate = selectedDates;
 
-        // Call the function to save the details
-        saveScheduleDetails(staffId, selectedLocation, selectedDate);
+        // Check if the location and dates are selected
+        if (!selectedLocation || selectedDate.length === 0) {
+            // If either the location or dates are missing, show an error message
+            showToastMessage('Please select a location and date(s).', 'error');
+        } else {
+            // Call the function to save the details
+            saveScheduleDetails(staffId, selectedLocation, selectedDate);
+            showToastMessage('Schedule details saved successfully.', 'success');
+        }
     };
 
 
@@ -65,8 +75,31 @@ const SchedulingForm = () => {
         console.log(dates)
     };
 
+
+
+    // TOAST
+    const showToastMessage = (message, type) => {
+        switch (type) {
+            case 'success':
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            case 'error':
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
+
   return (
-    <div className='flex flex-col w-[95%] md:w-[45%] items-center justify-center mx-auto mt-24 my-auto z-10 p-2 gap-8 bg-white h-auto text-black rounded-2xl border border-neutral-300 outline-none'>
+    <div className='flex flex-col w-[95%] md:w-[45%] items-center justify-center mx-auto mt-24 my-auto p-2 gap-8 bg-white h-auto text-black rounded-2xl border border-neutral-300 outline-none'>
         <div className='w-[60%] md:w-[30%] p-2 items-center justify-center flex border border-neutral-200'>
             <h3 className='font-bold'>Schedule Pick-up</h3>
         </div>
@@ -232,6 +265,7 @@ const SchedulingForm = () => {
             <BookingCalendar onDateSelect={handleDateSelection} />
             <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={handleScheduleBooking}>Schedule Pick-up</button>
         </div>
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }
