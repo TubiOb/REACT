@@ -1,18 +1,40 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { CgChevronDown } from 'react-icons/cg'
 import BookingCalendar from './BookingCalendar'
-import { collection, addDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebase.js';
 import Toast from './Toast'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const SchedulingForm = () => {
+const SchedulingForm = ({ onLocationSelect }) => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
     const [menuActive, setMenuActive] = useState(true);
     const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
     const [isButtonDisabled, setButtonDisabled] = useState(false);
+    const [isScheduleSaved, setScheduleSaved] = useState(false);
+
+
+    //  AUTHENTICATION/CHECKING IF USER ALREADY HAS SAVED PICKUP SCHEDULE IN DATABASE
+    useEffect(() => {
+        async function checkSchedule(userId) {
+            
+            // const userId = 'user123'; // Replace with your actual user ID retrieval logic
+            
+            const staffDocRef = doc(firestore, `Staff/${userId}`);
+            const scheduleSnapshot = await getDoc(staffDocRef);
+            
+            if (scheduleSnapshot.exists()) {
+                setButtonDisabled(true);
+                setScheduleSaved(true);
+                setMenuActive(false);
+            }
+        }
+
+        checkSchedule();
+    }, []);
+
 
 
     // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIEBASE
@@ -29,17 +51,22 @@ const SchedulingForm = () => {
                 location: location,
                 dates: flattenedDates,
             });
-            
-            console.log(userId);
-            console.log(location);
-            console.log(dates);
 
             console.log('Schedule details saved successfully.');
             setButtonDisabled(true);
+            setScheduleSaved(true);
+            resetMenuAndDates();
             showToastMessage('Schedule details saved successfully.', 'success');
         } catch (error) {
             console.error('Error saving schedule details:', error);
         }
+    };
+
+
+    // RESETS MENU AND SELECTED DATES
+    const resetMenuAndDates = () => {
+        setSelectedMenuItem('Closest Location'); // Reset the menu to 'Closest Location'
+        setSelectedDates([]); // Clear selected dates
     };
 
 
@@ -69,6 +96,7 @@ const SchedulingForm = () => {
     const handleMenuItemSelect = (menuItem) => {
         setSelectedMenuItem(menuItem);
         setMenuActive(false);
+        onLocationSelect(menuItem);
         console.log(menuItem)
     };
 
@@ -272,7 +300,7 @@ const SchedulingForm = () => {
         </div>
         <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
             <BookingCalendar onDateSelect={handleDateSelection} />
-            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={handleScheduleBooking} disabled={isButtonDisabled}>Schedule Pick-up</button>
+            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={() => handleScheduleBooking()} disabled={isButtonDisabled || isScheduleSaved}>Schedule Pick-up</button>
         </div>
         <Toast showToast={showToastMessage} />
     </div>
