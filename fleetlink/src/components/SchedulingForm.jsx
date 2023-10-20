@@ -12,11 +12,14 @@ const SchedulingForm = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
     const [menuActive, setMenuActive] = useState(true);
     const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
+    const [isButtonDisabled, setButtonDisabled] = useState(false);
 
 
     // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIEBASE
     const saveScheduleDetails = async (userId, location, dates) => {
         const scheduleRef = collection(firestore, 'Schedule Details');
+
+        const flattenedDates = dates.flat();
         
         try {
             // Create a new document with staff's ID as the document name
@@ -24,10 +27,16 @@ const SchedulingForm = () => {
             await addDoc(scheduleRef, {
                 staffId: userId,
                 location: location,
-                dates: dates,
+                dates: flattenedDates,
             });
+            
+            console.log(userId);
+            console.log(location);
+            console.log(dates);
 
             console.log('Schedule details saved successfully.');
+            setButtonDisabled(true);
+            showToastMessage('Schedule details saved successfully.', 'success');
         } catch (error) {
             console.error('Error saving schedule details:', error);
         }
@@ -51,7 +60,7 @@ const SchedulingForm = () => {
         } else {
             // Call the function to save the details
             saveScheduleDetails(staffId, selectedLocation, selectedDate);
-            showToastMessage('Schedule details saved successfully.', 'success');
+           
         }
     };
 
@@ -263,7 +272,7 @@ const SchedulingForm = () => {
         </div>
         <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
             <BookingCalendar onDateSelect={handleDateSelection} />
-            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={handleScheduleBooking}>Schedule Pick-up</button>
+            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={handleScheduleBooking} disabled={isButtonDisabled}>Schedule Pick-up</button>
         </div>
         <Toast showToast={showToastMessage} />
     </div>

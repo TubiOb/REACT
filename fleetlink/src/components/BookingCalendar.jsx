@@ -37,7 +37,7 @@ function BookingCalendar({ onDateSelect }) {
             // If only the start date is set, set the clicked date as the end date
             return [startDate, date];
         });
-        onDateSelect(dateRange)
+        onDateSelect(dateRange);
     };
 
   return (
@@ -63,6 +63,7 @@ function BookingCalendar({ onDateSelect }) {
                                 // If there's a start date but no end date, set the end date
                                 setDateRange([dateRange[0], date]);
                             }
+                            onDateSelect(dateRange);
                         }}
                         selectRange
                         onClickDay={handleDateClick}
