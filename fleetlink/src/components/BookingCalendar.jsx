@@ -3,14 +3,14 @@
 // import { LocalizationProvider } from '@mui/x-date-pickers-pro';
 // import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 // import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
-import '../index.css'
+
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../CustomCalendar.css';
 import { isAfter, isBefore, addDays } from 'date-fns';
 
-function BookingCalendar() {
+function BookingCalendar({ onDateSelect }) {
     const [dateRange, setDateRange] = useState([null, null]);
 
     const handleDateClick = (date) => {
@@ -20,15 +20,16 @@ function BookingCalendar() {
         // Set the start date if it's empty or both start and end are set
         setDateRange([date, null]);
         } else {
-        // Check if the selected date range is within the allowed range (e.g., 7 days)
-        const isWithinAllowedRange = isBefore(date, addDays(startDate, 7));
-        // Set the end date
-        if (isAfter(date, startDate)) {
-            setDateRange([startDate, date]);
-        } else {
-            setDateRange([date, startDate]);
+            // Check if the selected date range is within the allowed range (e.g., 7 days)
+            const isWithinAllowedRange = isBefore(date, addDays(startDate, 7));
+            // Set the end date
+            if (isAfter(date, startDate)) {
+                setDateRange([startDate, date]);
+            } else {
+                setDateRange([date, startDate]);
+            }
         }
-        }
+        onDateSelect(dateRange)
     };
 
   return (

@@ -1,12 +1,27 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { CgChevronDown } from 'react-icons/cg'
 import BookingCalendar from './BookingCalendar'
 
 const SchedulingForm = () => {
+    const [selectedMenuItem, setSelectedMenuItem] = useState('');
+
+    const handleMenuItemSelect = (menuItem) => {
+        setSelectedMenuItem(menuItem);
+        console.log(menuItem)
+    };
+
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
+
+    const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
+
+  // Callback function to update selected dates
+    const handleDateSelection = (dates) => {
+        setSelectedDates(dates);
+        console.log(dates)
+    };
 
   return (
     <div className='flex flex-col w-[95%] md:w-[45%] items-center justify-center mx-auto mt-24 my-auto z-10 p-2 gap-8 bg-white h-auto text-black rounded-2xl border border-neutral-300 outline-none'>
@@ -76,58 +91,94 @@ const SchedulingForm = () => {
                                     <div className="py-1">
                                         <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                            href="/"
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Alausa-Secretariat')
+                                            }}
                                             className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                 'block px-4 py-2 text-sm'
                                             )}
                                             >
-                                            Account settings
-                                            </a>
+                                            Alausa-Secretariat
+                                            </p>
                                         )}
                                         </Menu.Item>
                                         <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                            href="/"
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Allen')
+                                            }}
                                             className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                 'block px-4 py-2 text-sm'
                                             )}
                                             >
-                                            Support
-                                            </a>
+                                            Allen
+                                            </p>
                                         )}
                                         </Menu.Item>
                                         <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                            href="/"
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Egbeda')
+                                            }}
                                             className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                 'block px-4 py-2 text-sm'
                                             )}
                                             >
-                                            License
-                                            </a>
+                                            Egbeda
+                                            </p>
                                         )}
                                         </Menu.Item>
-                                        <form method="POST" action="#">
                                         <Menu.Item>
-                                            {({ active }) => (
-                                            <button
-                                                type="submit"
-                                                className={classNames(
+                                        {({ active }) => (
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Iyana Ipaja')
+                                            }}
+                                            className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                'block w-full px-4 py-2 text-left text-sm'
-                                                )}
-                                            >
-                                                Sign out
-                                            </button>
+                                                'block px-4 py-2 text-sm'
                                             )}
+                                            >
+                                            Iyana Ipaja
+                                            </p>
+                                        )}
                                         </Menu.Item>
-                                        </form>
+                                        <Menu.Item>
+                                        {({ active }) => (
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Ogba')
+                                            }}
+                                            className={classNames(
+                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                'block px-4 py-2 text-sm'
+                                            )}
+                                            >
+                                            Ogba
+                                            </p>
+                                        )}
+                                        </Menu.Item>
+                                        <Menu.Item>
+                                        {({ active }) => (
+                                            <p
+                                            onClick={() => {
+                                                handleMenuItemSelect('Oshodi')
+                                            }}
+                                            className={classNames(
+                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                'block px-4 py-2 text-sm'
+                                            )}
+                                            >
+                                            Oshodi
+                                            </p>
+                                        )}
+                                        </Menu.Item>
                                     </div>
                                 </Menu.Items>    
                         </Transition>
@@ -136,7 +187,7 @@ const SchedulingForm = () => {
             </div>
         </div>
         <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
-            <BookingCalendar />
+            <BookingCalendar onDateSelect={handleDateSelection} />
             <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'>Schedule Pick-up</button>
         </div>
     </div>
