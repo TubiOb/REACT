@@ -2,12 +2,54 @@ import React, { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { CgChevronDown } from 'react-icons/cg'
 import BookingCalendar from './BookingCalendar'
+import { collection, addDoc, doc } from 'firebase/firestore';
+import { firestore } from '../firebase.js';
 
 const SchedulingForm = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
+    const [menuActive, setMenuActive] = useState(true);
+    const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
 
+
+    // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIEBASE
+    const saveScheduleDetails = async (userId, location, dates) => {
+        const scheduleRef = collection(firestore, 'Schedule Details');
+        
+        try {
+            // Create a new document with staff's ID as the document name
+            const staffDocRef = doc(firestore, `Staff/${userId}`);
+            await addDoc(scheduleRef, {
+                staffId: userId,
+                location: location,
+                dates: dates,
+            });
+
+            console.log('Schedule details saved successfully.');
+        } catch (error) {
+            console.error('Error saving schedule details:', error);
+        }
+    };
+
+
+    // SAVING THE SCHEDULING DETAILS TO FIREBASE
+    const handleScheduleBooking = (userId) => {
+        // Get staff member's ID
+        const staffDocRef = doc(firestore, `Staff/${userId}`);
+        const staffId = staffDocRef; // Replace with your actual logic to get the staff ID
+
+        // Get the selected location and dates (from your component's state)
+        const selectedLocation = selectedMenuItem;
+        const selectedDate = selectedDates;
+
+        // Call the function to save the details
+        saveScheduleDetails(staffId, selectedLocation, selectedDate);
+    };
+
+
+    // HANDLING FUNCTION FOR SELECTED LOCATION
     const handleMenuItemSelect = (menuItem) => {
         setSelectedMenuItem(menuItem);
+        setMenuActive(false);
         console.log(menuItem)
     };
 
@@ -15,7 +57,7 @@ const SchedulingForm = () => {
         return classes.filter(Boolean).join(' ')
     }
 
-    const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
+    
 
   // Callback function to update selected dates
     const handleDateSelection = (dates) => {
@@ -73,8 +115,8 @@ const SchedulingForm = () => {
                     <legend className='text-neutral-800 font-bold text-sm ml-1 border-none outline-none'>Closest Location</legend>
                     <Menu as="div" className="relative inline-block w-full text-left">
                         <div>
-                            <Menu.Button className="inline-flex w-full justify-center gap-x-3.5 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-                            Closest Location
+                            <Menu.Button className="inline-flex w-full justify-center gap-x-3.5 rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" disabled={!menuActive}>
+                            {menuActive ? 'Closest Location' : selectedMenuItem}
                             <CgChevronDown className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
                             </Menu.Button>
                         </div>
@@ -188,7 +230,7 @@ const SchedulingForm = () => {
         </div>
         <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
             <BookingCalendar onDateSelect={handleDateSelection} />
-            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'>Schedule Pick-up</button>
+            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={handleScheduleBooking}>Schedule Pick-up</button>
         </div>
     </div>
   )
