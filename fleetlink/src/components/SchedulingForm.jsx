@@ -37,7 +37,7 @@ const SchedulingForm = ({ onLocationSelect }) => {
 
 
 
-    // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIEBASE
+    // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIREBASE
     const saveScheduleDetails = async (userId, location, dates) => {
         const scheduleRef = collection(firestore, 'Schedule Details');
 
@@ -57,6 +57,7 @@ const SchedulingForm = ({ onLocationSelect }) => {
             setScheduleSaved(true);
             resetMenuAndDates();
             showToastMessage('Schedule details saved successfully.', 'success');
+            console.log(userId);
         } catch (error) {
             console.error('Error saving schedule details:', error);
         }
@@ -75,6 +76,7 @@ const SchedulingForm = ({ onLocationSelect }) => {
         // Get staff member's ID
         const staffDocRef = doc(firestore, `Staff/${userId}`);
         const staffId = staffDocRef; // Replace with your actual logic to get the staff ID
+        console.log(userId);
 
         // Get the selected location and dates (from your component's state)
         const selectedLocation = selectedMenuItem;
