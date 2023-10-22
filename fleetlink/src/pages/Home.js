@@ -7,6 +7,7 @@ import WelcomeModal from '../components/WelcomeModal'
 import Footer from '../components/Footer'
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase.js';
+import { onAuthStateChanged } from 'firebase/auth'
 
 const Home = () => {
   const [show, setShow] = useState(localStorage.getItem('firstLogin') !== 'true');
@@ -52,45 +53,49 @@ const Home = () => {
 
   useEffect(() => {
     // Function to check if the user has already selected a location
-    const user = auth.currentUser;
-    console.log(user);
-    
-    if (user) {
-      const userId = user.uid;
-      console.log(userId);
+    const thisUser = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user)
+        const userId = user.uid;
+        console.log(userId);
 
-      async function checkUserLocation(userId) {
-        const q = query(
-          collection(firestore, 'Schedule Details'),
-          where('staffId', '==', userId)
-        );
+        async function checkUserLocation(userId) {
+          const q = query(
+            collection(firestore, 'Schedule Details'),
+            where('staffId', '==', userId)
+          );
 
-        const querySnapshot = await getDocs(q);
+          const querySnapshot = await getDocs(q);
 
-        if (querySnapshot.size > 0) {
-          // User has selected a location in the database
-          const scheduleDetails = querySnapshot.docs[0].data();
-          const selectedLocation = scheduleDetails.location;
+          if (querySnapshot.size > 0) {
+            // User has selected a location in the database
+            const scheduleDetails = querySnapshot.docs[0].data();
+            const selectedLocation = scheduleDetails.location;
 
-          // Send the selected location to the LiveTracker component
-          setSelectedLocation(selectedLocation);
-          console.log(selectedLocation);
+            // Send the selected location to the LiveTracker component
+            setSelectedLocation(selectedLocation);
+            console.log(selectedLocation);
 
-          // const matchingLocation = getCoordinatesForLocation(selectedLocation);
-          // if (matchingLocation) {
-          //   setMapCenter({
-          //     lat: matchingLocation.latitude,
-          //     lng: matchingLocation.longitude,
-          //   });
-          // }
+            // const matchingLocation = getCoordinatesForLocation(selectedLocation);
+            // if (matchingLocation) {
+            //   setMapCenter({
+            //     lat: matchingLocation.latitude,
+            //     lng: matchingLocation.longitude,
+            //   });
+            // }
+          }
+          
         }
-      }
 
       // Check if the user has already selected a location
-    
         checkUserLocation(userId);
-    }
+      }
+        
+    });
+
+    return () => thisUser();
   }, []);
+   
 
 
 
