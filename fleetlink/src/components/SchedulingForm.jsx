@@ -2,13 +2,14 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { CgChevronDown } from 'react-icons/cg'
 import BookingCalendar from './BookingCalendar'
-import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
-import { firestore } from '../firebase.js';
+import { collection, addDoc, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { auth, firestore } from '../firebase.js';
 import Toast from './Toast'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { onAuthStateChanged } from 'firebase/auth';
 
-const SchedulingForm = ({ onLocationSelect }) => {
+const SchedulingForm = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('');
     const [menuActive, setMenuActive] = useState(true);
     const [selectedDates, setSelectedDates] = useState([]); // State to store selected dates
@@ -18,21 +19,39 @@ const SchedulingForm = ({ onLocationSelect }) => {
 
     //  AUTHENTICATION/CHECKING IF USER ALREADY HAS SAVED PICKUP SCHEDULE IN DATABASE
     useEffect(() => {
-        async function checkSchedule(userId) {
-            
-            // const userId = 'user123'; // Replace with your actual user ID retrieval logic
-            
-            const staffDocRef = doc(firestore, `Staff/${userId}`);
-            const scheduleSnapshot = await getDoc(staffDocRef);
-            
-            if (scheduleSnapshot.exists()) {
-                setButtonDisabled(true);
-                setScheduleSaved(true);
-                setMenuActive(false);
-            }
-        }
+        const thisUser = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userId = user.uid;
+                console.log(userId)
 
-        checkSchedule();
+                async function checkSchedule(userId) {
+                    const staffDocRef = doc(firestore, 'Staff', userId);
+                    console.log(staffDocRef)
+                    const scheduleSnapshot = await getDoc(staffDocRef);
+                    console.log(scheduleSnapshot);
+
+                    if (scheduleSnapshot.exists()) {
+                        
+                    } else {
+                        const scheduleDetailsCollectionRef = collection(firestore, 'Schedule Details');
+                        const userQuery = query(scheduleDetailsCollectionRef, where('staffId', '==', userId));
+                        const scheduleDetailsQuerySnapshot = await getDocs(userQuery);
+
+                        if (!scheduleDetailsQuerySnapshot.empty) {
+                            // User has schedule details in the "Schedule Details" collection
+                            // You can do something here to handle this case
+                            setButtonDisabled(true);
+                            setScheduleSaved(true);
+                            setMenuActive(false);
+                        }
+                    }
+                }
+
+                checkSchedule(userId);
+            }
+        });
+        
+        return () => thisUser();
     }, []);
 
 
@@ -40,12 +59,14 @@ const SchedulingForm = ({ onLocationSelect }) => {
     // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIREBASE
     const saveScheduleDetails = async (userId, location, dates) => {
         const scheduleRef = collection(firestore, 'Schedule Details');
+        console.log(userId);
 
         const flattenedDates = dates.flat();
         
         try {
             // Create a new document with staff's ID as the document name
             const staffDocRef = doc(firestore, `Staff/${userId}`);
+            console.log(staffDocRef);
             await addDoc(scheduleRef, {
                 staffId: userId,
                 location: location,
@@ -71,16 +92,17 @@ const SchedulingForm = ({ onLocationSelect }) => {
     };
 
 
+
+
     // SAVING THE SCHEDULING DETAILS TO FIREBASE
     const handleScheduleBooking = (userId) => {
-        // Get staff member's ID
-        const staffDocRef = doc(firestore, `Staff/${userId}`);
-        const staffId = staffDocRef; // Replace with your actual logic to get the staff ID
-        console.log(userId);
+        console.log('User:', userId);
 
         // Get the selected location and dates (from your component's state)
         const selectedLocation = selectedMenuItem;
         const selectedDate = selectedDates;
+        console.log('Selected Location:', selectedMenuItem);
+        console.log('Selected Dates:', selectedDates);
 
         // Check if the location and dates are selected
         if (!selectedLocation || selectedDate.length === 0) {
@@ -88,17 +110,20 @@ const SchedulingForm = ({ onLocationSelect }) => {
             showToastMessage('Please select a location and date(s).', 'error');
         } else {
             // Call the function to save the details
-            saveScheduleDetails(staffId, selectedLocation, selectedDate);
-           
+            saveScheduleDetails(userId, selectedLocation, selectedDate);
+
         }
     };
+
+
+   
 
 
     // HANDLING FUNCTION FOR SELECTED LOCATION
     const handleMenuItemSelect = (menuItem) => {
         setSelectedMenuItem(menuItem);
-        setMenuActive(false);
-        onLocationSelect(menuItem);
+        // setMenuActive(false);
+        // onLocationSelect(menuItem);
         console.log(menuItem)
     };
 

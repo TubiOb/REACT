@@ -95,16 +95,16 @@ const LiveTracker = ({ selectedLocation }) => {
   useEffect(() => {
     // Update the map center based on the selectedLocation
     if (selectedLocation) {
+      console.log(selectedLocation);
       const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
       console.log(matchingLocation);
       if (matchingLocation) {
         setMapCenter({
           lat: matchingLocation.latitude,
           lng: matchingLocation.longitude,
-          
         });
-        console.log(matchingLocation.latitude);
-        console.log(matchingLocation.longitude);
+        console.log('Selected Location:', selectedLocation);
+        console.log('Coordinates:', matchingLocation.latitude, matchingLocation.longitude);
       }
     }
   }, [selectedLocation, locations]);
@@ -140,7 +140,7 @@ const LiveTracker = ({ selectedLocation }) => {
             <Maps center={mapCenter} zoom={zoom} className='relative w-full h-full' />
         </div>
         <TrackingInfo />
-        <button className='mx-auto text-white px-2 py-2 rounded-xl w-[40%] md:w-[20%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'>Schedule Pick-up</button>
+        <button className='mx-auto text-white px-2 py-2 rounded-xl w-[40%] md:w-[20%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'><a href="/pickupSchedule">Schedule Pick-up</a></button>
 
         {/* <SchedulingForm onLocationSelect={handleLocationSelect} /> */}
     </div>
