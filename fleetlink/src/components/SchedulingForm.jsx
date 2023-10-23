@@ -24,7 +24,7 @@ const SchedulingForm = () => {
                 const userId = user.uid;
                 console.log(userId)
 
-                async function checkSchedule(userId) {
+                async function checkSchedule() {
                     const staffDocRef = doc(firestore, 'Staff', userId);
                     console.log(staffDocRef)
                     const scheduleSnapshot = await getDoc(staffDocRef);
@@ -47,40 +47,46 @@ const SchedulingForm = () => {
                     }
                 }
 
-                checkSchedule(userId);
+                checkSchedule();
+                // handleScheduleBooking(userId);
             }
         });
         
         return () => thisUser();
-    }, []);
+    });
 
 
 
     // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIREBASE
     const saveScheduleDetails = async (userId, location, dates) => {
-        const scheduleRef = collection(firestore, 'Schedule Details');
-        console.log(userId);
-
-        const flattenedDates = dates.flat();
-        
-        try {
-            // Create a new document with staff's ID as the document name
-            const staffDocRef = doc(firestore, `Staff/${userId}`);
-            console.log(staffDocRef);
-            await addDoc(scheduleRef, {
-                staffId: userId,
-                location: location,
-                dates: flattenedDates,
-            });
-
-            console.log('Schedule details saved successfully.');
-            setButtonDisabled(true);
-            setScheduleSaved(true);
-            resetMenuAndDates();
-            showToastMessage('Schedule details saved successfully.', 'success');
+        const user = auth.currentUser; // Get the currently signed-in user
+        if (user) {
+            const userId = user.uid; // Get the user's ID
+            console.log('User:', userId);
+            const scheduleRef = collection(firestore, 'Schedule Details');
             console.log(userId);
-        } catch (error) {
-            console.error('Error saving schedule details:', error);
+
+            const flattenedDates = dates.flat();
+            
+            try {
+                // Create a new document with staff's ID as the document name
+                const staffDocRef = doc(firestore, `Staff/${userId}`);
+                console.log(staffDocRef);
+                await addDoc(scheduleRef, {
+                    staffId: userId,
+                    location: location,
+                    dates: flattenedDates,
+                });
+
+                console.log('Schedule details saved successfully.');
+                setButtonDisabled(true);
+                setScheduleSaved(true);
+                resetMenuAndDates();
+                showToastMessage('Schedule details saved successfully.', 'success');
+                console.log(userId);
+            } catch (error) {
+                console.error('Error saving schedule details:', error);
+            }
         }
     };
 
@@ -96,21 +102,26 @@ const SchedulingForm = () => {
 
     // SAVING THE SCHEDULING DETAILS TO FIREBASE
     const handleScheduleBooking = (userId) => {
-        console.log('User:', userId);
+        const user = auth.currentUser; // Get the currently signed-in user
+        if (user) {
+            const userId = user.uid; // Get the user's ID
+            console.log('User:', userId);
+        // console.log('User:', userId);
 
         // Get the selected location and dates (from your component's state)
-        const selectedLocation = selectedMenuItem;
-        const selectedDate = selectedDates;
-        console.log('Selected Location:', selectedMenuItem);
-        console.log('Selected Dates:', selectedDates);
+            const selectedLocation = selectedMenuItem;
+            const selectedDate = selectedDates;
+            console.log('Selected Location:', selectedMenuItem);
+            console.log('Selected Dates:', selectedDates);
 
-        // Check if the location and dates are selected
-        if (!selectedLocation || selectedDate.length === 0) {
-            // If either the location or dates are missing, show an error message
-            showToastMessage('Please select a location and date(s).', 'error');
-        } else {
-            // Call the function to save the details
-            saveScheduleDetails(userId, selectedLocation, selectedDate);
+            // Check if the location and dates are selected
+            if (!selectedLocation || selectedDate.length === 0) {
+                // If either the location or dates are missing, show an error message
+                showToastMessage('Please select a location and date(s).', 'error');
+            } else {
+                // Call the function to save the details
+                saveScheduleDetails(userId, selectedLocation, selectedDate);
+            }
 
         }
     };
