@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // import { useNavigate  } from 'react-router-dom';
 import EyeSplash from '../assets/eye-slash.png'
 import Eye from '../assets/eye.png'
+import '../index.css'
 
 const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/gi;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -24,6 +25,9 @@ const LoginForm = () => {
 
     // const history = useHistory();
     // const navigate = useNavigate();
+
+    // const [showEmailLabel, setShowEmailLabel] = useState(false);
+    // const [showPasswordLabel, setShowPasswordLabel] = useState(false);
 
     useEffect(() => {
       if (isTyping) {
@@ -93,15 +97,21 @@ const LoginForm = () => {
     <div className='Frame11752 w-[400px] h-[304px] flex-col justify-start items-end gap-12 inline-fle'>
       <div className='flex flex-col items-center justify-between w-full gap-8'>
       
-        <div className={`InputFields w-full h-11 px-6 py-3 ${isInputEnabled ? 'rounded-lg border border-neutral-400' : 'bg-gray-50 rounded-lg border border-gray-200'} justify-start items-center gap-2.5 inline-flex`}>
+        <div className={`InputFields w-full h-11 py-1 relative float-label-input ${isInputEnabled ? 'rounded-lg border border-neutral-400' : 'bg-gray-50 rounded-lg border border-gray-200'} justify-center items-center gap-2.5 inline-flex`}>
+          <label for='email' className="absolute top-4 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+            Email Address
+          </label>
           {isInputEnabled ? (
-            <input
-              type="email"
-              value={email}
-              placeholder='Email address'
-              onChange={handleEmailChange}
-              className={`EmailInput p-1 border-transparent outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validEmail ? 'border-green-600' : 'border-red-600'}`}
-            />
+              <input
+                type="email"
+                value={email}
+                id='email'
+                placeholder=''
+                onChange={handleEmailChange}
+                className={`EmailInput p-1 px-6 border-transparent items-center justify-center w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validEmail ? 'border-green-600' : 'border-red-600'}`}
+              />
+
+            
           ) : (
             
             <div className="Frame11140 self-stretch justify-start w-full items-start gap-2.5 inline-flex">
@@ -112,11 +122,11 @@ const LoginForm = () => {
         </div>
         
         
-        {!email && !validEmail && touchedEmail && showNextButton && (
+        { !email && !validEmail && touchedEmail && showNextButton && (
           <p className="text-red-500 text-xs -mt-9 left-0">Please enter your email</p>
         )}
 
-        {email && !validEmail && touchedEmail && showNextButton && (
+        { email && !validEmail && touchedEmail && showNextButton && (
           <p className="text-red-500 text-xs -mt-9 left-0">Invalid email. Please enter a valid email address.</p>
         )}
 
@@ -135,33 +145,41 @@ const LoginForm = () => {
         {showPassword && (
           <div className="flex flex-col items-center justify-between w-full gap-8">
             <div className='InputFields w-full h-11 px-3 flex flex-row items-center rounded-lg justify-between gap-2.5 border border-neutral-400'>
-              <input 
-                type={passwordVisible ? 'text' : 'password'} 
-                value={password} 
-                placeholder='Enter password' 
-                onChange={handlePasswordChange} 
-                className={`p-1 border-transparent outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validPassword ? 'border-green-400' : 'border-red-500'}`} />
-              <div className="w-5 h-5 relative">
-                {passwordVisible ? (
-                    <img
-                      src={EyeSplash}
-                      alt="Hide Password"
-                      onClick={togglePasswordVisibility}
-                      className="cursor-pointer left-0 w-5 h-5 mr-1"
-                    />
-                  ) : (
-                    <img
-                      src={Eye}
-                      alt="Show Password"
-                      onClick={togglePasswordVisibility}
-                      className="cursor-pointer left-0 w-5 h-5 mr-1"
-                    />
-                )}
+             <div class="relative float-label-input">
+                <label for='password' className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+                  Enter Password
+                </label>
+             
+                <input 
+                  type={passwordVisible ? 'text' : 'password'} 
+                  value={password}
+                  id='password'
+                  placeholder='' 
+                  onChange={handlePasswordChange} 
+                  className={`p-1 border-transparent w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validPassword ? 'border-green-400' : 'border-red-500'}`} 
+                   />
+                <div className="w-5 h-5 relative">
+                  {passwordVisible ? (
+                      <img
+                        src={EyeSplash}
+                        alt="Hide Password"
+                        onClick={togglePasswordVisibility}
+                        className="cursor-pointer left-0 w-5 h-5 mr-1"
+                      />
+                    ) : (
+                      <img
+                        src={Eye}
+                        alt="Show Password"
+                        onClick={togglePasswordVisibility}
+                        className="cursor-pointer left-0 w-5 h-5 mr-1"
+                      />
+                  )}
+                </div>
               </div>
             </div>
 
 
-                {!password && !validPassword && touchedPassword && password === '' && {handleLoginClick} && (
+                { !password && !validPassword && touchedPassword && password === '' && {handleLoginClick} && (
                   <p className="text-red-500 text-xs -mt-7 left-0">Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, one digit, and one special character.</p>
                 )}
             <div className="Frame3180 self-stretch h-20 flex-col justify-center items-center gap-3 inline-flex">
