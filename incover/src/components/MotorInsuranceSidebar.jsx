@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/BOI Ins Broker 1.png'
 import myImage from '../assets/IMG_20210903_102641.jpg'
 import Backbutton from './Backbutton'
-import { RiShieldCheckLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
+import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
 import { CiExport } from 'react-icons/ci'
+import Shield from '../assets/shield-tick.svg'
 
 const MotorInsuranceSidebar = () => {
     const [activeItem, setActiveItem] = useState('motor insurance');
@@ -39,10 +40,10 @@ const MotorInsuranceSidebar = () => {
         </div>
 
         <ul className='grid grid-cols-1 justify-between gap-2 h-auto mx-auto w-[80%] sticky'>
-            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'motor insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('motor insurance')}><RiShieldCheckLine size={15}/> Motor Insurance</li></Link>
-            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
-            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance1' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance1')}><RiShieldCheckLine size={15} /> Health Insurance</li></Link>
-            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance2' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance2')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
+            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'motor insurance' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('motor insurance')}><img src={Shield} alt="" /> Motor Insurance</li></Link>
+            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance')}><img src={Shield} alt="" /> Health Insurance</li></Link>
+            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance1' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance1')}><img src={Shield} alt="" /> Health Insurance</li></Link>
+            <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance2' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance2')}><img src={Shield} alt="" /> Health Insurance</li></Link>
         </ul>
       </div>
         

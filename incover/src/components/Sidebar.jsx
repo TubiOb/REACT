@@ -2,14 +2,18 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/BOI Ins Broker 1.png'
 import myImage from '../assets/IMG_20210903_102641.jpg'
-import { MdOutlineSpaceDashboard,  } from 'react-icons/md'
-import { BsSubtract } from 'react-icons/bs'
-import { GoShieldCheck } from 'react-icons/go'
+// import { MdOutlineSpaceDashboard,  } from 'react-icons/md'
+// import { BsSubtract } from 'react-icons/bs'
+// import { GoShieldCheck } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
-import { RiBillLine, RiArrowDownSLine, RiArrowUpSLine, RiShieldCheckLine } from 'react-icons/ri'
+import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
 // import { , RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
 import { CiExport } from 'react-icons/ci'
 import Backbutton from './Backbutton'
+import Bill from '../assets/bill.svg'
+import Shield from '../assets/shield-tick.svg'
+import Element from '../assets/element-2.svg'
+import Mouse from '../assets/mouse-square.svg'
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('dashboard');
@@ -46,14 +50,14 @@ const Sidebar = () => {
            {activeItem !== 'my-policies' ? (
               <ul className='grid grid-cols-1 justify-between gap-16 h-auto mx-auto w-[80%] sticky'>
                 <ul className='w-full gap-1.5'>
-                  <Link to='/dashboard'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'dashboard' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('dashboard')}><MdOutlineSpaceDashboard size={15} /><p className='md:flex hidden'>dashboard</p></li></Link>
-                  <Link to='/setup-guide'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'setup-guide' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('setup-guide')}><BsSubtract size={15}/><p className='md:flex hidden'>setup guide</p></li></Link>
+                  <Link to='/dashboard'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'dashboard' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('dashboard')}><img src={Element} alt='' /><p className='md:flex hidden'>dashboard</p></li></Link>
+                  <Link to='/setup-guide'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'setup-guide' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('setup-guide')}>< img src={Mouse} alt='' /><p className='md:flex hidden'>setup guide</p></li></Link>
                 </ul>
 
                 <ul className='w-full gap-1.5'>
                   <h3 className='text-gray-400 uppercase text-xs md:flex hidden'>insurance</h3>
-                  <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-policies' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-policies')}><GoShieldCheck size={15}/><p className='md:flex hidden'>my policies</p></li>
-                  <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-claims' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><RiBillLine size={15}/><p className='md:flex hidden'>my claims</p><IoIosArrowForward size={15} className='ml-3 md:ml-12 md:flex hidden'/></li>
+                  <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-policies' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-policies')}><img src={Shield} alt="" /><p className='md:flex hidden'>my policies</p></li>
+                  <li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'my-claims' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('my-claims')}><img src={Bill} alt=''/><p className='md:flex hidden'>my claims</p><IoIosArrowForward size={15} className='ml-3 md:ml-12 md:flex hidden'/></li>
                 </ul>
               </ul>
 
@@ -67,10 +71,10 @@ const Sidebar = () => {
             </div>
 
 
-              <Link to='/policies'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'motor insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('motor insurance')}><RiShieldCheckLine size={15}/> Motor Insurance</li></Link>
-              <Link to='#'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
-              <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance1' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance1')}><RiShieldCheckLine size={15} /> Health Insurance</li></Link>
-              <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance2' ? 'bg-green-100 text-green-700 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance2')}><RiShieldCheckLine size={15}/>Health Insurance</li></Link>
+              <Link to='/policies'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer ${activeItem === 'motor insurance' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('motor insurance')}><img src={Shield} alt="" /> Motor Insurance</li></Link>
+              <Link to='#'  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance')}><img src={Shield} alt="" /> Health Insurance</li></Link>
+              <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance1' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance1')}><img src={Shield} alt="" /> Health Insurance</li></Link>
+              <Link to=''  className='flex'><li className={`capitalize text-xs md:text-sm flex flex-row items-center justify-start p-1.5 w-full gap-1 hover:cursor-pointer hover:text-green-700 ${activeItem === 'health insurance2' ? 'bg-gray-200 text-green-900 font-semibold rounded-xl' : ''}`} onClick={() => handleItemClick('health insurance2')}><img src={Shield} alt="" /> Health Insurance</li></Link>
           </ul> )}
           
         </div>
@@ -114,7 +118,7 @@ const Sidebar = () => {
             </div>
             )}
           </li>
-        </ul>
+      </ul>
 
     </div>
   )
