@@ -98,26 +98,28 @@ const LoginForm = () => {
       <div className='flex flex-col items-center justify-between w-full gap-8'>
       
         <div className={`InputFields w-full h-11 py-1 relative float-label-input ${isInputEnabled ? 'rounded-lg border border-neutral-400' : 'bg-gray-50 rounded-lg border border-gray-200'} justify-center items-center gap-2.5 inline-flex`}>
-          <label for='email' className="absolute top-4 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
-            Email Address
-          </label>
-          {isInputEnabled ? (
+          
+         
               <input
                 type="email"
                 value={email}
                 id='email'
-                placeholder=''
+                placeholder=' '
                 onChange={handleEmailChange}
-                className={`EmailInput p-1 px-6 border-transparent items-center justify-center w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validEmail ? 'border-green-600' : 'border-red-600'}`}
+                className={`EmailInput py-3 px-3 appearance-none border-red-900 items-center justify-center w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validEmail ? 'border-green-600' : 'border-red-600'}`}
               />
 
             
-          ) : (
+          {/* ) : (
             
             <div className="Frame11140 self-stretch justify-start w-full items-start gap-2.5 inline-flex">
               <div className=" grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight">{email}</div>
             </div>
-          )}
+          )} */}
+
+            <label for='email' className="absolute focus:top-3 foc left-3 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+              Email Address
+            </label>
           
         </div>
         
@@ -144,20 +146,21 @@ const LoginForm = () => {
 
         {showPassword && (
           <div className="flex flex-col items-center justify-between w-full gap-8">
-            <div className='InputFields w-full h-11 px-3 flex flex-row items-center rounded-lg justify-between gap-2.5 border border-neutral-400'>
-             <div class="relative float-label-input">
-                <label for='password' className="absolute top-3 left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
-                  Enter Password
-                </label>
+            <div className='InputFields w-full h-11 px-3 relative float-label-input flex flex-row items-center rounded-lg justify-between gap-2.5 border border-neutral-400'>
+                
              
                 <input 
                   type={passwordVisible ? 'text' : 'password'} 
                   value={password}
                   id='password'
-                  placeholder='' 
+                  placeholder=' ' 
                   onChange={handlePasswordChange} 
                   className={`p-1 border-transparent w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validPassword ? 'border-green-400' : 'border-red-500'}`} 
                    />
+
+                   <label for='password' className="absolute left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+                      Enter Password
+                   </label>
                 <div className="w-5 h-5 relative">
                   {passwordVisible ? (
                       <img
@@ -175,7 +178,6 @@ const LoginForm = () => {
                       />
                   )}
                 </div>
-              </div>
             </div>
 
 
