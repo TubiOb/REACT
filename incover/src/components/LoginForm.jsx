@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import EyeSplash from '../assets/eye-slash.png'
 import Eye from '../assets/eye.png'
 import '../index.css'
+import { useNavigate } from 'react-router-dom'
+import Toast from './Toast'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/gi;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -25,6 +29,7 @@ const LoginForm = () => {
 
     // const history = useHistory();
     // const navigate = useNavigate();
+    const history = useNavigate();
 
     // const [showEmailLabel, setShowEmailLabel] = useState(false);
     // const [showPasswordLabel, setShowPasswordLabel] = useState(false);
@@ -83,15 +88,75 @@ const LoginForm = () => {
  
   // };
 
-  const handleLoginClick = () => {
-    if (validPassword && password !== '') {
-      // navigate('/dashboard');
-      // Link
-      <Link to={'/dashboard'} className="Buttons self-stretch px-6 py-3 bg-green-800 rounded-lg justify-center items-center gap-2.5 inline-flex hover:bg-green-900 transition ease-in-out cursor-pointer">
-        <button className="Button2 text-white text-base font-medium font-['Red Hat Display'] leading-normal">Sign in</button>
-      </Link>
+  const handleLoginClick = async (e) => {
+    e.preventDefault();
+
+    const response = await loginToApi(email, password);
+
+    if (response.success) {
+      setTimeout(() => {
+          history('/dashboard');
+      }, 3500);
+    }
+    else {
+
+    }
+    // if (validPassword && password !== '') {
+    //   // navigate('/dashboard');
+    //   // Link
+    //   <Link to={'/dashboard'} className="Buttons self-stretch px-6 py-3 bg-g
+    //   consyreen-800 rounded-lg justify-center items-center gap-2.5 inline-flex hover:bg-green-900 transition ease-in-out cursor-pointer">
+    //     <button className="Button2 text-white text-base font-medium font-['Red Hat Display'] leading-normal">Sign in</button>
+    //   </Link>
+    // }
+  };
+
+
+
+  async function loginToApi(email, password) {
+
+    try {
+      const response = await fetch('https://devapiv2.boiibonline.ng/api/AdminAccount/Login');
+
+      if (response.ok) {
+        const data = await response.json();
+        showToastMessage('Sign In Successful', 'success');
+        return { success: true, data };
+      }
+      else {
+        showToastMessage('Incorrect email or Password', 'error');
+        return { success: false, error: 'Login failed' };
+      }
+    }
+    catch (error) {
+      showToastMessage('Network error', 'error');
+      return { success: false, error: 'Network error'}
     }
   };
+
+
+
+
+  const showToastMessage = (message, type) => {
+        switch (type) {
+            case 'success':
+                toast.success(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            case 'error':
+                toast.error(message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 3000,
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
+
 
   return (
     <div className='Frame11752 w-[400px] h-[304px] flex-col justify-start items-end gap-12 inline-fle'>
@@ -195,6 +260,8 @@ const LoginForm = () => {
           
         )}
       </div>
+
+      <Toast showToast={showToastMessage} />
     </div>
     
   )
