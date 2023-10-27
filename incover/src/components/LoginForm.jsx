@@ -95,11 +95,11 @@ const LoginForm = () => {
 
     if (response.success) {
       setTimeout(() => {
-          history('/dashboard');
+          history.push('/dashboard');
       }, 3500);
     }
     else {
-
+      console.log('Login failed:', response.error);
     }
     // if (validPassword && password !== '') {
     //   // navigate('/dashboard');
@@ -114,9 +114,20 @@ const LoginForm = () => {
 
 
   async function loginToApi(email, password) {
+    const loginData = {
+        email: email,
+        password: password,
+    };
+
 
     try {
-      const response = await fetch('https://devapiv2.boiibonline.ng/api/AdminAccount/Login');
+      const response = await fetch('https://devapiv2.boiibonline.ng/api/AdminAccount/Login', {
+      method: 'POST',  // Use the POST method for login
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData),  // Send the user's login data
+    });
 
       if (response.ok) {
         const data = await response.json();
@@ -129,6 +140,7 @@ const LoginForm = () => {
       }
     }
     catch (error) {
+      console.error('Network error:', error);
       showToastMessage('Network error', 'error');
       return { success: false, error: 'Network error'}
     }
@@ -159,7 +171,7 @@ const LoginForm = () => {
 
 
   return (
-    <div className='Frame11752 w-[400px] h-[304px] flex-col justify-start items-end gap-12 inline-fle'>
+    <div className='Frame11752 md:w-[400px] w-[90%] md:mx-0 mx-auto h-[304px] flex-col justify-start items-end gap-12 inline-fle'>
       <div className='flex flex-col items-center justify-between w-full gap-8'>
       
         <div className={`InputFields w-full h-11 py-1 relative float-label-input ${isInputEnabled ? 'rounded-lg border border-neutral-400' : 'bg-gray-50 rounded-lg border border-gray-200'} justify-center items-center gap-2.5 inline-flex`}>
@@ -182,7 +194,7 @@ const LoginForm = () => {
             </div>
           )} */}
 
-            <label for='email' className="absolute focus:top-3 foc left-3 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+            <label htmlFor='email' className="absolute focus:top-3 foc left-3 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
               Email Address
             </label>
           
@@ -223,7 +235,7 @@ const LoginForm = () => {
                   className={`p-1 border-transparent w-full h-full outline-none rounded-md grow shrink basis-0 text-neutral-500 text-sm font-normal font-['Red Hat Display'] leading-tight ${validPassword ? 'border-green-400' : 'border-red-500'}`} 
                    />
 
-                   <label for='password' className="absolute left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
+                   <label htmlFor='password' className="absolute left-0 text-gray-400 pointer-events-none transition duration-200 ease-in-outbg-white px-2 text-grey-darker">
                       Enter Password
                    </label>
                 <div className="w-5 h-5 relative">
