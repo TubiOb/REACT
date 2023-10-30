@@ -58,7 +58,8 @@ const SchedulingForm = () => {
 
 
     // COLLECTING THE SCHEDULING DETAILS AND RETRIEVING STAFFID FROM FIREBASE
-    const saveScheduleDetails = async (userId, location, dates) => {
+    const saveScheduleDetails = async (userId, location, dates, e) => {
+        e.preventDefault();
         const user = auth.currentUser; // Get the currently signed-in user
         if (user) {
             const userId = user.uid; // Get the user's ID
@@ -101,7 +102,8 @@ const SchedulingForm = () => {
 
 
     // SAVING THE SCHEDULING DETAILS TO FIREBASE
-    const handleScheduleBooking = (userId) => {
+    const handleScheduleBooking = (userId, e) => {
+        e.preventDefault();
         const user = auth.currentUser; // Get the currently signed-in user
         if (user) {
             const userId = user.uid; // Get the user's ID
