@@ -5,9 +5,11 @@ import TrackingInfo from './TrackingInfo';
 import L from 'leaflet';
 
 const LiveTracker = ({ selectedLocation }) => {
-  const [mapCenter, setMapCenter] = useState({
-    geocode: [6.4541, 3.3947],
-  });
+  // const [mapCenter, setMapCenter] = useState({
+  //   geocode: [6.4541, 3.3947],
+  // });
+
+  const [userLocation, setUserLocation] = useState(null);
 
   const locations = useMemo(() => [
       {
@@ -37,8 +39,6 @@ const LiveTracker = ({ selectedLocation }) => {
   ], []);
 
   const zoom = 13;
-
-
 
 
   // const getCoordinatesForLocation = useCallback((selectedLocation) => {
@@ -85,40 +85,62 @@ const LiveTracker = ({ selectedLocation }) => {
 
 
 
+  // Function to update the user's location
+  const updateLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation([latitude, longitude]);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not available in this browser.");
+    }
+  };
 
   useEffect(() => {
-    // Update the map center based on the selectedLocation
-    if (selectedLocation) {
+    // Update the user's location when the component mounts
+    updateLocation();
+  }, []);
+
+
+  // useEffect(() => {
+  //   // Update the map center based on the selectedLocation
+  //   if (selectedLocation) {
       
-      const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
+  //     const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
       
-      if (matchingLocation) {
-        setMapCenter({
-          lat: matchingLocation.latitude,
-          lng: matchingLocation.longitude,
-        });
+  //     if (matchingLocation) {
+  //       setMapCenter({
+  //         lat: matchingLocation.latitude,
+  //         lng: matchingLocation.longitude,
+  //       });
         
-      }
-    }
-  }, [selectedLocation, locations]);
+  //     }
+  //   }
+  // }, [selectedLocation, locations]);
 
 
 
-  useEffect(() => {
-  // Update the map center based on the selectedLocation
-  if (selectedLocation) {
-    console.log(selectedLocation);
-    const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
-    console.log(matchingLocation);
-    if (matchingLocation) {
-      setMapCenter({
-        geocode: matchingLocation.geocode, // Use the geocode property
-      });
-      console.log('Selected Location:', selectedLocation);
-      console.log('Coordinates:', matchingLocation.geocode);
-    }
-  }
-}, [selectedLocation, locations]);
+//   useEffect(() => {
+//   // Update the map center based on the selectedLocation
+//   if (selectedLocation) {
+//     console.log(selectedLocation);
+//     const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
+//     console.log(matchingLocation);
+//     if (matchingLocation) {
+//       setMapCenter({
+//         geocode: matchingLocation.geocode, // Use the geocode property
+//       });
+//       console.log('Selected Location:', selectedLocation);
+//       console.log('Coordinates:', matchingLocation.geocode);
+//     }
+//   }
+// }, [selectedLocation, locations]);
 
 
 
@@ -142,36 +164,38 @@ const LiveTracker = ({ selectedLocation }) => {
 
 
   // Create a separate marker icon for the mapCenter
-  const mapCenterIcon = L.icon({
-    iconUrl: 'path-to-mapCenter-icon.png', // Replace with the path to your mapCenter marker icon
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-  });
+  // const mapCenterIcon = L.icon({
+    
+  // });
 
   // Create an array of marker objects for both mapCenter and locations
   const markers = useMemo(() => {
-    const centerMarker = {
-      name: 'Center',
-      latitude: mapCenter.geocode[0],
-      longitude: mapCenter.geocode[1],
-      icon: mapCenterIcon,
-    };
+    const userMarker = userLocation 
+    ? {
+        name: 'User',
+        position: L.latLng(userLocation[0], userLocation[1]), // Use L.latLng for position
+        icon: L.icon({
+          iconUrl: require('../assets/markers/google-maps (2).png'), // Replace with the path to your mapCenter marker icon
+          iconSize: [38, 38],
+          // iconAnchor: [12, 41],
+          // popupAnchor: [1, -34],
+        }),
+      } 
+    : null;
 
-    const locationMarkers = locations.map(location => ({
+    const locationMarkers = locations.map((location) => ({
       name: location.name,
-      latitude: location.geocode[0],
-      longitude: location.geocode[1],
+      position: L.latLng(location.geocode[0], location.geocode[1]), // Use L.latLng for position
       icon: L.icon({
-        iconUrl: 'path-to-location-icon.png', // Replace with the path to your location marker icon
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
+        iconUrl: require('../assets/markers/pin_5871229 (2).png'),
+        iconSize: [38, 38],
+        // iconAnchor: [12, 41],
+        // popupAnchor: [1, -34],
       }),
     }));
 
-    return [centerMarker, ...locationMarkers];
-  }, [locations, mapCenter, mapCenterIcon]);
+    return [userMarker, ...locationMarkers].filter((marker) => marker);
+  }, [locations, userLocation]);
 
 
 
@@ -181,7 +205,7 @@ const LiveTracker = ({ selectedLocation }) => {
             <h3 className='pl-3 md:p1-2'>Live Tracker</h3>
         </div>
         <div className='flex p-2 w-full h-[500px] items-center justify-center box-border'>
-            <Maps center={mapCenter} zoom={zoom} markers={markers} className='relative w-full h-full' />
+            <Maps zoom={zoom} position={userLocation} markers={markers} className='relative w-full h-full' />
         </div>
         <TrackingInfo />
         <button className='mx-auto text-white px-2 py-2 rounded-xl w-[40%] md:w-[20%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'><a href="/pickupSchedule">Schedule Pick-up</a></button>
