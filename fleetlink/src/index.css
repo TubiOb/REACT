@@ -47,7 +47,7 @@ body {
 /* SIZE OF LEAFLET MAP */
 .leaflet-container {
   height: 100%;
-  width: 100%;
+  width: 100vw;
 }
 
 

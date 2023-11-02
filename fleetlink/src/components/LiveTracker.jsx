@@ -60,7 +60,7 @@ const LiveTracker = ({ selectedLocation }) => {
       }
     };
 
-    // Update the user's location when the component mounts
+    // Updating the user's location when the component mounts
     updateLocation();
     console.log('User Location:', userLocation);
     // console.log('Locations:', locations);
@@ -69,14 +69,14 @@ const LiveTracker = ({ selectedLocation }) => {
 
 
 
-  // Create an array of marker objects for both mapCenter and locations
+  // Array of marker objects for both mapCenter and locations
   const markers = useMemo(() => {
     const userMarker = userLocation 
     ? {
         name: 'User',
-        position: L.latLng(userLocation[0], userLocation[1]), // Use L.latLng for position
+        position: L.latLng(userLocation[0], userLocation[1]),
         icon: L.icon({
-          iconUrl: require('../assets/markers/google-maps (2).png'), // Replace with the path to your mapCenter marker icon
+          iconUrl: require('../assets/markers/google-maps (2).png'),
           iconSize: [38, 38],
           // iconAnchor: [12, 41],
           // popupAnchor: [1, -34],
@@ -86,10 +86,10 @@ const LiveTracker = ({ selectedLocation }) => {
 
 
 
-    
+
     const locationMarkers = locations.find((location) => location.name === selectedLocation);
       if (locationMarkers) {
-        // Extract coordinates of the selected location
+        // Extracting the coordinates of the selected location
       const { geocode } = locationMarkers;
       const selectedLocationCoordinates = {
         name: selectedLocation,
