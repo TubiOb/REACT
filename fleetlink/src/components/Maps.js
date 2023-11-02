@@ -1,19 +1,28 @@
-// import { MarkerClusterGroup } from 'leaflet'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, /* useMap */ } from 'react-leaflet'
-// import 'leaflet/dist/leaflet.css'
+import MarkerClusterGroup from 'react-leaflet-cluster'
+import '../index.css'
+import 'leaflet/dist/leaflet.css'
+
 
 const Maps = ({ position, zoom, markers }) => {
+
+  useEffect(() => {
+    console.log('Center:', position);
+    console.log('Zoom:', zoom);
+    console.log('Markers:', markers);
+  }, [position, zoom, markers]);
+
   return (
-    <MapContainer id="map" center={position} zoom={zoom}>
+    <MapContainer id='map' position={position} zoom={zoom} scrollWheelZoom={true}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {/* <MarkerClusterGroup> */}
+        <MarkerClusterGroup chunkedLoading>
             {markers.map((marker, index) => (
               <Marker key={index} position={marker.position}>
                 <Popup>{marker.name}</Popup>
               </Marker>
             ))}
-        {/* </MarkerClusterGroup> */}
+        </MarkerClusterGroup>
 
     </MapContainer>
   )

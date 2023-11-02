@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth'
+import '../index.css'
 
 const Home = () => {
   const [show, setShow] = useState(localStorage.getItem('firstLogin') !== 'true');

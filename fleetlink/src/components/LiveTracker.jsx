@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Maps from './Maps'
+// import TrackingInfo from './TrackingInfo';
+import '../index.css'
 import 'leaflet/dist/leaflet.css'
-import TrackingInfo from './TrackingInfo';
 import L from 'leaflet';
 
 const LiveTracker = ({ selectedLocation }) => {
@@ -86,26 +87,32 @@ const LiveTracker = ({ selectedLocation }) => {
 
 
   // Function to update the user's location
-  const updateLocation = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation([latitude, longitude]);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not available in this browser.");
-    }
-  };
+  
 
   useEffect(() => {
+    const updateLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.watchPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setUserLocation([latitude, longitude]);
+
+            console.log('User Location (Updated):', userLocation);
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not available in this browser.");
+      }
+    };
+
     // Update the user's location when the component mounts
     updateLocation();
-  }, []);
+    console.log('User Location:', userLocation);
+    console.log('Locations:', locations);
+  }, [userLocation, locations]);
 
 
   // useEffect(() => {
@@ -183,19 +190,26 @@ const LiveTracker = ({ selectedLocation }) => {
       } 
     : null;
 
-    const locationMarkers = locations.map((location) => ({
-      name: location.name,
-      position: L.latLng(location.geocode[0], location.geocode[1]), // Use L.latLng for position
-      icon: L.icon({
-        iconUrl: require('../assets/markers/pin_5871229 (2).png'),
-        iconSize: [38, 38],
-        // iconAnchor: [12, 41],
-        // popupAnchor: [1, -34],
-      }),
-    }));
 
-    return [userMarker, ...locationMarkers].filter((marker) => marker);
-  }, [locations, userLocation]);
+    const locationMarkers = locations.find((location) => location.name === selectedLocation);
+      if (locationMarkers) {
+        // Extract coordinates of the selected location
+      const { geocode } = locationMarkers;
+      const selectedLocationCoordinates = {
+        name: selectedLocation,
+        position: L.latLng(geocode[0], geocode[1]),
+        icon: L.icon({
+          iconUrl: require('../assets/markers/pin_5871229 (2).png'),
+          iconSize: [38, 38],
+        }),
+      };
+     
+
+        return [userMarker, selectedLocationCoordinates];
+      } else {
+        return [userMarker];
+      }
+    }, [locations, selectedLocation, userLocation]);
 
 
 
@@ -205,10 +219,12 @@ const LiveTracker = ({ selectedLocation }) => {
             <h3 className='pl-3 md:p1-2'>Live Tracker</h3>
         </div>
         <div className='flex p-2 w-full h-[500px] items-center justify-center box-border'>
+          {userLocation && (
             <Maps zoom={zoom} position={userLocation} markers={markers} className='relative w-full h-full' />
+          )}
         </div>
-        <TrackingInfo />
-        <button className='mx-auto text-white px-2 py-2 rounded-xl w-[40%] md:w-[20%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'><a href="/pickupSchedule">Schedule Pick-up</a></button>
+        {/* <TrackingInfo /> */}
+        <button className='mx-auto text-white px-2 py-2 rounded-xl w-[45%] md:w-[25%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center'><a href="/pickupSchedule">Schedule Pick-up</a></button>
 
         {/* <SchedulingForm onLocationSelect={handleLocationSelect} /> */}
     </div>
