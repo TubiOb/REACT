@@ -6,9 +6,6 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
 
 const LiveTracker = ({ selectedLocation }) => {
-  // const [mapCenter, setMapCenter] = useState({
-  //   geocode: [6.4541, 3.3947],
-  // });
 
   const [userLocation, setUserLocation] = useState(null);
 
@@ -42,53 +39,8 @@ const LiveTracker = ({ selectedLocation }) => {
   const zoom = 13;
 
 
-  // const getCoordinatesForLocation = useCallback((selectedLocation) => {
-  //   const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
-  //   return matchingLocation;
-  // }, [locations]);
-
-  
-
-
-  // useEffect(() => {
-  //   // Function to check if the user has already selected a location
-  //   const user = auth.currentUser;
-  //   if (user) {
-  //     const userId = user.uid;
-  //     async function checkUserLocation(userId) {
-  //       const q = query(
-  //         collection(firestore, 'Schedule Details'),
-  //         where('staffId', '==', userId)
-  //       );
-
-  //       const querySnapshot = await getDocs(q);
-
-  //       if (querySnapshot.size > 0) {
-  //         // User has selected a location in the database
-  //         const scheduleDetails = querySnapshot.docs[0].data();
-  //         const selectedLocation = scheduleDetails.location;
-
-  //         const matchingLocation = getCoordinatesForLocation(selectedLocation);
-  //         if (matchingLocation) {
-  //           setMapCenter({
-  //             lat: matchingLocation.latitude,
-  //             lng: matchingLocation.longitude,
-  //           });
-  //         }
-  //       }
-  //     }
-
-  //     // Check if the user has already selected a location
-    
-  //       checkUserLocation(userId);
-  //   }
-  // }, [getCoordinatesForLocation]);
-
-
 
   // Function to update the user's location
-  
-
   useEffect(() => {
     const updateLocation = () => {
       if ("geolocation" in navigator) {
@@ -115,65 +67,7 @@ const LiveTracker = ({ selectedLocation }) => {
   }, [userLocation, locations]);
 
 
-  // useEffect(() => {
-  //   // Update the map center based on the selectedLocation
-  //   if (selectedLocation) {
-      
-  //     const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
-      
-  //     if (matchingLocation) {
-  //       setMapCenter({
-  //         lat: matchingLocation.latitude,
-  //         lng: matchingLocation.longitude,
-  //       });
-        
-  //     }
-  //   }
-  // }, [selectedLocation, locations]);
 
-
-
-//   useEffect(() => {
-//   // Update the map center based on the selectedLocation
-//   if (selectedLocation) {
-//     console.log(selectedLocation);
-//     const matchingLocation = locations.find((loc) => loc.name === selectedLocation);
-//     console.log(matchingLocation);
-//     if (matchingLocation) {
-//       setMapCenter({
-//         geocode: matchingLocation.geocode, // Use the geocode property
-//       });
-//       console.log('Selected Location:', selectedLocation);
-//       console.log('Coordinates:', matchingLocation.geocode);
-//     }
-//   }
-// }, [selectedLocation, locations]);
-
-
-
-
-  // const handleLocationSelect = (location) => {
-  //   setSelectedLocation(location);
-
-  //   // Cross-check the selected location with the list of locations
-  //   const matchingLocation = getCoordinatesForLocation(location);
-
-  //   if (matchingLocation) {
-  //     // Perform your desired action here, e.g., update state or display a message
-  //     setMapCenter({
-  //       lat: matchingLocation.latitude,
-  //       lng: matchingLocation.longitude,
-  //     })
-
-  //     console.log('Location matched:', matchingLocation);
-  //   }
-  // };
-
-
-  // Create a separate marker icon for the mapCenter
-  // const mapCenterIcon = L.icon({
-    
-  // });
 
   // Create an array of marker objects for both mapCenter and locations
   const markers = useMemo(() => {
@@ -191,6 +85,8 @@ const LiveTracker = ({ selectedLocation }) => {
     : null;
 
 
+
+    
     const locationMarkers = locations.find((location) => location.name === selectedLocation);
       if (locationMarkers) {
         // Extract coordinates of the selected location
