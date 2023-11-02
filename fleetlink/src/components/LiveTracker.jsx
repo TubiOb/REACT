@@ -111,7 +111,7 @@ const LiveTracker = ({ selectedLocation }) => {
     // Update the user's location when the component mounts
     updateLocation();
     console.log('User Location:', userLocation);
-    console.log('Locations:', locations);
+    // console.log('Locations:', locations);
   }, [userLocation, locations]);
 
 

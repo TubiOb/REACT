@@ -102,8 +102,8 @@ const SchedulingForm = () => {
 
 
     // SAVING THE SCHEDULING DETAILS TO FIREBASE
-    const handleScheduleBooking = (userId, e) => {
-        e.preventDefault();
+    const handleScheduleBooking = (userId) => {
+        // e.preventDefault();
         const user = auth.currentUser; // Get the currently signed-in user
         if (user) {
             const userId = user.uid; // Get the user's ID
