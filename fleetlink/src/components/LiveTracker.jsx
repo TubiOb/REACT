@@ -63,46 +63,46 @@ const LiveTracker = () => {
             // You can extract and set the selected location here if needed
             const { selectedLocation } = scheduleDetailsQuerySnapshot.docs[0].data();
             setSelectedLocation(selectedLocation);
+
+
+            // Continue with the rest of the code...
+            const staffDocRef = doc(firestore, 'Staff', userId);
+            const scheduleSnapshot = await getDoc(staffDocRef);
+
+            if (scheduleSnapshot.exists()) {
+              // User has schedule details
+              const { selectedLocation } = scheduleSnapshot.data();
+              setSelectedLocation(selectedLocation);
+              const updateLocation = () => {
+                  if ("geolocation" in navigator) {
+                    navigator.geolocation.watchPosition(
+                      (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setUserLocation([latitude, longitude]);
+                        setMapReady(true);
+
+                        // console.log('User Location (Updated):', userLocation);
+                      },
+                      (error) => {
+                        console.error(error);
+                      }
+                    );
+                  } else {
+                    console.error("Geolocation is not available in this browser.");
+                  }
+                };
+
+
+                
+
+              // Updating the user's location when the component mounts
+              updateLocation();
+              console.log('User Location:', userLocation);
+            }
+
           }
 
-          // Continue with the rest of the code...
-          const staffDocRef = doc(firestore, 'Staff', userId);
-          const scheduleSnapshot = await getDoc(staffDocRef);
-
-          if (scheduleSnapshot.exists()) {
-            // User has schedule details
-            const { selectedLocation } = scheduleSnapshot.data();
-            setSelectedLocation(selectedLocation);
-            const updateLocation = () => {
-                if ("geolocation" in navigator) {
-                  navigator.geolocation.watchPosition(
-                    (position) => {
-                      const { latitude, longitude } = position.coords;
-                      setUserLocation([latitude, longitude]);
-                      setMapReady(true);
-
-                      // console.log('User Location (Updated):', userLocation);
-                    },
-                    (error) => {
-                      console.error(error);
-                    }
-                  );
-                } else {
-                  console.error("Geolocation is not available in this browser.");
-                }
-              };
-
-
-              const locationMarkers = locations.find((location) => location.name === selectedLocation);
-              if (locationMarkers) {
-                const { geocode } = locationMarkers;
-                console.log(geocode);
-              }
-
-            // Updating the user's location when the component mounts
-            updateLocation();
-            console.log('User Location:', userLocation);
-          } else {
+           else {
             // No schedule details found, default to the user's current location
             console.log('REACHING FOUL')
               const updateLocation = () => {
@@ -183,8 +183,8 @@ const LiveTracker = () => {
     ? {
         name: 'User',
         position: L.latLng(userLocation[0], userLocation[1]),
-        icon: L.icon({
-          iconUrl: require('../assets/markers/google-maps (2).png'),
+        icon: L.icon ({
+          iconUrl: '../assets/markers/google-maps (2).png',
           iconSize: [38, 38],
           // iconAnchor: [12, 41],
           // popupAnchor: [1, -34],
@@ -203,8 +203,9 @@ const LiveTracker = () => {
         name: selectedLocation,
         position: L.latLng(geocode[0], geocode[1]),
         icon: L.icon({
-          iconUrl: require('../assets/markers/pin_5871229 (2).png'),
+          iconUrl: '../assets/markers/pin_5871229 (2).png',
           iconSize: [38, 38],
+          
         }),
       };
      
@@ -227,14 +228,13 @@ const LiveTracker = () => {
         <div className='flex p-2 w-full h-[500px] items-center justify-center box-border'>
           {userLocation && mapReady && (
             // <Maps zoom={zoom} position={userLocation} markers={markers} className='relative w-full h-full' />
-               <MapContainer id='map' center={userLocation} markers={markers} zoom={zoom} scrollWheelZoom={true}>
+               <MapContainer id='map' center={userLocation} zoom={zoom} scrollWheelZoom={true}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                 <MarkerClusterGroup chunkedLoading>
                   
-                  
                   {markers.map((marker, index) => (
-                    <Marker key={index} center={marker.userLocation}>
+                    <Marker key={index} position={marker.position}>
                       <Popup>
                         {marker.name}
                       </Popup>
