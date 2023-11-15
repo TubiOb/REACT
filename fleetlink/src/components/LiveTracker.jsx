@@ -121,7 +121,7 @@ const LiveTracker = ({ selectedLocation }) => {
         <div className='flex p-2 w-full h-[500px] items-center justify-center box-border'>
           {userLocation && mapReady && (
             // <Maps zoom={zoom} position={userLocation} markers={markers} className='relative w-full h-full' />
-               <MapContainer id='map' center={userLocation} zoom={zoom} scrollWheelZoom={true}>
+               <MapContainer id='map' position={userLocation} markers={markers} zoom={zoom} scrollWheelZoom={true}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                 <MarkerClusterGroup chunkedLoading>
