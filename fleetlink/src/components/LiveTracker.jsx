@@ -6,11 +6,17 @@ import MarkerClusterGroup from 'react-leaflet-cluster'
 import '../index.css'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { auth, firestore } from '../firebase.js';
+import { onAuthStateChanged } from 'firebase/auth';
 
-const LiveTracker = ({ selectedLocation }) => {
+const LiveTracker = () => {
 
   const [userLocation, setUserLocation] = useState(null);
   const [mapReady, setMapReady] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+
 
   const locations = useMemo(() => [
       {
@@ -39,37 +45,135 @@ const LiveTracker = ({ selectedLocation }) => {
       },
   ], []);
 
+
+
+  useEffect(() => {
+    const checkUserSchedule = async () => {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const userId = user.uid;
+
+          // Check for user's schedule details
+          const scheduleDetailsCollectionRef = collection(firestore, 'Schedule Details');
+          const userQuery = query(scheduleDetailsCollectionRef, where('staffId', '==', userId));
+          const scheduleDetailsQuerySnapshot = await getDocs(userQuery);
+
+          if (!scheduleDetailsQuerySnapshot.empty) {
+            // User has schedule details
+            // You can extract and set the selected location here if needed
+            const { selectedLocation } = scheduleDetailsQuerySnapshot.docs[0].data();
+            setSelectedLocation(selectedLocation);
+          }
+
+          // Continue with the rest of the code...
+          const staffDocRef = doc(firestore, 'Staff', userId);
+          const scheduleSnapshot = await getDoc(staffDocRef);
+
+          if (scheduleSnapshot.exists()) {
+            // User has schedule details
+            const { selectedLocation } = scheduleSnapshot.data();
+            setSelectedLocation(selectedLocation);
+            const updateLocation = () => {
+                if ("geolocation" in navigator) {
+                  navigator.geolocation.watchPosition(
+                    (position) => {
+                      const { latitude, longitude } = position.coords;
+                      setUserLocation([latitude, longitude]);
+                      setMapReady(true);
+
+                      // console.log('User Location (Updated):', userLocation);
+                    },
+                    (error) => {
+                      console.error(error);
+                    }
+                  );
+                } else {
+                  console.error("Geolocation is not available in this browser.");
+                }
+              };
+
+
+              const locationMarkers = locations.find((location) => location.name === selectedLocation);
+              if (locationMarkers) {
+                const { geocode } = locationMarkers;
+                console.log(geocode);
+              }
+
+            // Updating the user's location when the component mounts
+            updateLocation();
+            console.log('User Location:', userLocation);
+          } else {
+            // No schedule details found, default to the user's current location
+            console.log('REACHING FOUL')
+              const updateLocation = () => {
+                if ("geolocation" in navigator) {
+                  navigator.geolocation.watchPosition(
+                    (position) => {
+                      const { latitude, longitude } = position.coords;
+                      setUserLocation([latitude, longitude]);
+                      setMapReady(true);
+
+                      // console.log('Us+er Location (Updated):', userLocation);
+                    },
+                    (error) => {
+                      console.error(error);
+                    }
+                  );
+                } else {
+                  console.error("Geolocation is not available in this browser.");
+                }
+              };
+
+              // Updating the user's location when the component mounts
+              updateLocation();
+              console.log('User Location:', userLocation);
+                
+              }
+            }
+        });
+    };
+
+    checkUserSchedule();
+    console.log('User Location:', userLocation);
+  }, [userLocation, locations]);
+
+
+
+
+
+
+  
+
   const zoom = 13;
 
 
 
   // Function to update the user's location
-  useEffect(() => {
-    const updateLocation = () => {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.watchPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setUserLocation([latitude, longitude]);
-            setMapReady(true);
+  // useEffect(() => {
+  //   const updateLocation = () => {
+  //     if ("geolocation" in navigator) {
+  //       navigator.geolocation.watchPosition(
+  //         (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           setUserLocation([latitude, longitude]);
+  //           setMapReady(true);
 
-            console.log('User Location (Updated):', userLocation);
-          },
-          (error) => {
-            console.error(error);
-          }
-        );
-      } else {
-        console.error("Geolocation is not available in this browser.");
-      }
-    };
+  //           console.log('User Location (Updated):', userLocation);
+  //         },
+  //         (error) => {
+  //           console.error(error);
+  //         }
+  //       );
+  //     } else {
+  //       console.error("Geolocation is not available in this browser.");
+  //     }
+  //   };
 
-    // Updating the user's location when the component mounts
-    updateLocation();
-    console.log('User Location:', userLocation);
-    // console.log('Locations:', locations);
-  }, [userLocation, locations]);
-
+  //   // Updating the user's location when the component mounts
+  //   updateLocation();
+  //   console.log('User Location:', userLocation);
+  //   // console.log('Locations:', locations);
+  // }, [userLocation, locations]);
 
 
 
@@ -104,10 +208,12 @@ const LiveTracker = ({ selectedLocation }) => {
         }),
       };
      
+      console.log('Selected Location Coordinates:', selectedLocationCoordinates.position);
 
-        return [userMarker, selectedLocationCoordinates];
-      } else {
-        return [userMarker];
+        return [userMarker, selectedLocationCoordinates].filter((marker) => marker);
+      } 
+      else {
+        return [userMarker].filter((marker) => marker);
       }
     }, [locations, selectedLocation, userLocation]);
 
@@ -121,10 +227,12 @@ const LiveTracker = ({ selectedLocation }) => {
         <div className='flex p-2 w-full h-[500px] items-center justify-center box-border'>
           {userLocation && mapReady && (
             // <Maps zoom={zoom} position={userLocation} markers={markers} className='relative w-full h-full' />
-               <MapContainer id='map' position={userLocation} markers={markers} zoom={zoom} scrollWheelZoom={true}>
+               <MapContainer id='map' center={userLocation} markers={markers} zoom={zoom} scrollWheelZoom={true}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                 <MarkerClusterGroup chunkedLoading>
+                  
+                  
                   {markers.map((marker, index) => (
                     <Marker key={index} center={marker.userLocation}>
                       <Popup>
