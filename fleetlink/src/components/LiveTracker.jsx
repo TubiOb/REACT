@@ -9,7 +9,7 @@ import L from 'leaflet';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
-import { Icon } from '@mui/material'
+// import { Icon } from '@mui/material'
 
 
 const LiveTracker = () => {
@@ -49,23 +49,19 @@ const LiveTracker = () => {
   ], []);
 
 
-  const customUserIcon = L.icon({
-          iconUrl: require('../assets/markers/google-maps (2).png'),
-          iconSize: [38, 38],
-          // iconAnchor: [12, 41],
-          // popupAnchor: [1, -34],
-  })
+  // const customUserIcon = L.icon({
+  //         iconUrl: '../assets/markers/google-maps (2).png',
+  //         iconSize: [38, 38],
+  //         // iconAnchor: [12, 41],
+  //         // popupAnchor: [1, -34],
+  // })
 
 
 
-  const customLocationIcon = L.icon({
-          iconUrl: require('../assets/markers/pin_5871229 (2).png'),
-          iconSize: [38, 38],
-  })
-  
-
-
-  
+  // const customLocationIcon = L.icon({
+  //         iconUrl: '../assets/markers/pin_5871229 (2).png',
+  //         iconSize: [38, 38],
+  // })
 
 
 
@@ -95,6 +91,7 @@ const LiveTracker = () => {
               // User has schedule details
               const { selectedLocation } = scheduleSnapshot.data();
               setSelectedLocation(selectedLocation);
+
               const updateLocation = () => {
                   if ("geolocation" in navigator) {
                     navigator.geolocation.watchPosition(
@@ -102,8 +99,7 @@ const LiveTracker = () => {
                         const { latitude, longitude } = position.coords;
                         setUserLocation([latitude, longitude]);
                         setMapReady(true);
-
-                        // console.log('User Location (Updated):', userLocation);
+                        console.log('User Location (Updated):', userLocation);
                       },
                       (error) => {
                         console.error(error);
@@ -113,8 +109,6 @@ const LiveTracker = () => {
                     console.error("Geolocation is not available in this browser.");
                   }
                 };
-
-
                 
 
               // Updating the user's location when the component mounts
@@ -126,7 +120,7 @@ const LiveTracker = () => {
                 ? {
                     name: 'User',
                     position: L.latLng(userLocation[0], userLocation[1]),
-                    icon: customUserIcon, // Make sure to define customUserIcon
+                    // icon: customUserIcon, // Make sure to define customUserIcon
                   }
                 : null;
 
@@ -137,16 +131,13 @@ const LiveTracker = () => {
                 selectedLocationCoordinatesRef.current = {
                   name: selectedLocation,
                   position: L.latLng(geocode[0], geocode[1]),
-                  icon: customLocationIcon, // Make sure to define customLocationIcon
+                  // icon: customLocationIcon, // Make sure to define customLocationIcon
                 };
               } else {
                 selectedLocationCoordinatesRef.current = null;
               }
-
             }
-
           }
-
            else {
             // No schedule details found, default to the user's current location
             console.log('REACHING FOUL')
@@ -157,8 +148,7 @@ const LiveTracker = () => {
                       const { latitude, longitude } = position.coords;
                       setUserLocation([latitude, longitude]);
                       setMapReady(true);
-
-                      // console.log('Us+er Location (Updated):', userLocation);
+                      console.log('Us+er Location (Updated):', userLocation);
                     },
                     (error) => {
                       console.error(error);
@@ -178,7 +168,7 @@ const LiveTracker = () => {
               ? {
                   name: 'User',
                   position: L.latLng(userLocation[0], userLocation[1]),
-                  icon: customUserIcon, // Make sure to define customUserIcon
+                  // icon: customUserIcon, // Make sure to define customUserIcon
                 }
               : null;
 
@@ -190,9 +180,13 @@ const LiveTracker = () => {
         });
     };
 
-    checkUserSchedule();
+    const fetchData = async () => {
+      await  checkUserSchedule();
+    }
+   
+    fetchData();
     console.log('User Location:', userLocation);
-  }, [ userLocation, locations, customUserIcon, customLocationIcon]);
+  }, [ userLocation, locations]);
 
   
 
@@ -215,17 +209,14 @@ const LiveTracker = () => {
         {
           name: selectedLocation,
           position: L.latLng(geocode[0], geocode[1]),
-          icon: customLocationIcon,
+          // icon: customLocationIcon,
         },
       ].filter((marker) => marker);
     } else {
       return [userMarker].filter((marker) => marker);
     }
-  }, [locations, selectedLocation, userMarker, customLocationIcon]);
+  }, [locations, selectedLocation, userMarker]);
 
-
-    // let userMarker = null;
-    // let selectedLocationCoordinates = null;
 
   return (
     <div className='flex flex-col w-[95%] items-center mx-auto mt-4 p-2 gap-4 drop-shadow-2xl bg-inherit h-[650px] text-black'>
@@ -242,14 +233,14 @@ const LiveTracker = () => {
 
 
                   {userMarker && (
-                    <Marker position={userMarker.position} icon={userMarker.icon}>
+                    <Marker position={userMarker.position} >
                       <Popup>{userMarker.name}</Popup>
                     </Marker>
                   )}
 
                   {/* Marker for selectedLocationCoordinates */}
                   {selectedLocationCoordinates && (
-                    <Marker position={selectedLocationCoordinates.position} icon={selectedLocationCoordinates.icon}>
+                    <Marker position={selectedLocationCoordinates.position} >
                       <Popup>{selectedLocationCoordinates.name}</Popup>
                     </Marker>
                   )}
