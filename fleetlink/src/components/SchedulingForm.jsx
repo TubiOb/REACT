@@ -340,7 +340,9 @@ const SchedulingForm = () => {
         </div>
         <div className='w-full flex flex-col h-auto p-2 items-center justify-center mt-2 gap-4'>
             <BookingCalendar onDateSelect={handleDateSelection} />
-            <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={() => handleScheduleBooking()} disabled={isButtonDisabled || isScheduleSaved}>Schedule Pick-up</button>
+            {/* <button className='mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center' onClick={() => handleScheduleBooking()} disabled={isButtonDisabled || isScheduleSaved}>Schedule Pick-up</button> */}
+            <button className={`mx-auto text-white px-2 py-2 rounded-xl w-[60%] md:w-[40%] bg-neutral-900 font-semibold shadow-neutral-800 shadow-2xl transition duration-300 hover:bg-white hover:text-neutral-900 hover:shadow-md hover:font-semibold hover:border hover:border-neutral-300 hover:shadow-neutral-300 text-sm md:text-lg flex items-center justify-center ${isButtonDisabled || isScheduleSaved ? 'cursor-not-allowed' : ''}`} onClick={() => handleScheduleBooking()} disabled={isButtonDisabled || isScheduleSaved}>Schedule Pick-up</button>
+
         </div>
         <Toast showToast={showToastMessage} />
     </div>

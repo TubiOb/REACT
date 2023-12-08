@@ -33,7 +33,7 @@ const Welcome = () => {
     getLoggedInUserData();
 
   return (
-    <div className='flex flex-col w-[95%] items-center mx-auto mt-24 z-10 p-2 gap-4 bg-white h-auto text-black rounded-2xl border-none outline-none'>
+    <div className='flex flex-col w-[95%] items-center mx-auto mt-24 p-2 gap-4 bg-white h-auto text-black rounded-2xl border-none outline-none'>
         <div className='flex font-bold items-start justify-start w-full'>
             <h3 className='pl-3 md:p1-2'>Welcome, <span className='uppercase'>{loggedInUserName}</span></h3>
         </div>

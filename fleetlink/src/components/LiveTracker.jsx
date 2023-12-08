@@ -9,6 +9,7 @@ import L from 'leaflet';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { auth, firestore } from '../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
+import { useLeafletIcon } from "react-leaflet-icon";
 // import { Icon } from '@mui/material'
 
 
@@ -49,7 +50,7 @@ const LiveTracker = () => {
   ], []);
 
 
-  // const customUserIcon = L.icon({
+  // var customUserIcon = L.icon({
   //         iconUrl: '../assets/markers/google-maps (2).png',
   //         iconSize: [38, 38],
   //         // iconAnchor: [12, 41],
@@ -58,10 +59,26 @@ const LiveTracker = () => {
 
 
 
-  // const customLocationIcon = L.icon({
+  // var customLocationIcon = L.icon({
   //         iconUrl: '../assets/markers/pin_5871229 (2).png',
   //         iconSize: [38, 38],
   // })
+
+
+  // ...
+
+var customUserIcon = useLeafletIcon({
+  iconUrl: '../assets/markers/google-maps (2).png',
+  iconSize: [38, 38],
+  // You can include other icon options here
+});
+
+var customLocationIcon = useLeafletIcon({
+  iconUrl: '../assets/markers/pin_5871229 (2).png',
+  iconSize: [38, 38],
+  // You can include other icon options here
+});
+
 
 
 
@@ -186,7 +203,7 @@ const LiveTracker = () => {
    
     fetchData();
     console.log('User Location:', userLocation);
-  }, [ userLocation, locations]);
+  }, [ userLocation, locations, /*  customLocationIcon, customUserIcon */]);
 
   
 
@@ -215,7 +232,7 @@ const LiveTracker = () => {
     } else {
       return [userMarker].filter((marker) => marker);
     }
-  }, [locations, selectedLocation, userMarker]);
+  }, [locations, selectedLocation, userMarker, /* customLocationIcon */]);
 
 
   return (
@@ -229,17 +246,17 @@ const LiveTracker = () => {
                <MapContainer id='map' center={userLocation} zoom={zoom} scrollWheelZoom={true}>
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-                <MarkerClusterGroup chunkedLoading>
+                {/* <MarkerClusterGroup chunkedLoading> */}
 
 
-                  {userMarker && (
+                  {/* {userMarker && (
                     <Marker position={userMarker.position} >
                       <Popup>{userMarker.name}</Popup>
                     </Marker>
-                  )}
+                  )} */}
 
                   {/* Marker for selectedLocationCoordinates */}
-                  {selectedLocationCoordinates && (
+                  {/* {selectedLocationCoordinates && (
                     <Marker position={selectedLocationCoordinates.position} >
                       <Popup>{selectedLocationCoordinates.name}</Popup>
                     </Marker>
@@ -251,8 +268,8 @@ const LiveTracker = () => {
                         {marker.name}
                       </Popup>
                     </Marker>
-                  ))}
-                </MarkerClusterGroup>
+                  ))} */}
+                {/* </MarkerClusterGroup> */}
                 
               </MapContainer>
           )}
